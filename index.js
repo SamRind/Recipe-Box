@@ -29,7 +29,7 @@ const routes = [
   });
   
   // Add your code here
-  app.get('/Search', (req, res) => {
+  app.get('/search', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write(`<h1>Welcome!</h1>`);
     res.end();

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Exercise</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="bg-dark">
+    <form class="bg-light border rounded w-50 mx-auto mt-5 p-3" action='/submit' method='POST'>
+      <h1 class="mt-2 mb-4">Search For Recipes!</h1>
+        <label for="search">Search *</label>
+        <input
+          type="text"
+          class="form-control"
+          id="search"
+          name = "search"
+          required
+        />
+      </div>
+      <div class="form-group mt-3 mb-0">
+        <button type="submit" class="btn btn-primary" value="Submit">Search</button>
+        <button type="reset" class="btn btn-secondary" value="Reset">Reset</button>
+        <div class="form-group">
+          <label for="comments">Results</label>
+          </br>
+          <textarea class="form-control rounded-0" id="comments" rows="6" name = "comments"></textarea>
+          <div class="from-group">
+            <input type="checkbox" id="signup" name="signup" checked="checked"/>
+            <label for="signup">Save into box</label>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+</form>
+</div>
+</main>
+</body>
+</html>
