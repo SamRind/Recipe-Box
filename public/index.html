@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Form Exercise</title>
+    <title>Web Forms</title>
     <link
       rel="stylesheet"
       type="text/css"
@@ -12,19 +12,22 @@
   </head>
   <body class="bg-dark">
     <form action="\search" method="POST" class="bg-light border rounded w-50 mx-auto mt-5 p-3">
+      <div class= "from-group">
+        <div class="form-outline"></div>
       <h1 class="mt-2 mb-4">Search For Recipes!</h1>
-        <label for="search">Search</label>
+        <label for="search"></label>
         <input
           type="text"
           placeholder="Search..."
           class="form-control"
           id="search"
-          name = "search"
+          name="search"
           required
         />
       </div>
       <div class="form-group mt-3 mb-0">
         <button type="submit" class="btn btn-primary" value="Submit">Search</button>
+      </div>
         <div class="form-group">
             <input type="checkbox" id="signup" name="signup" checked="checked"/>
             <label for="signup">Save into box</label>
