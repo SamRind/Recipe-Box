@@ -37,15 +37,29 @@ const routes = [
     res.end();
   });
   
-  // Add your code here
+  
   app.get('/search', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write(`<h1>Welcome!</h1>`);
-    res.end();
+    res.sendFile(path.join(__dirname + '/public/index.html'));
   });
   app.post('/Search', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write(`<h1>Welcome!</h1>`);
+    var lookup = req.body.search;
+    var searchurl = {
+    method: 'GET',
+    url: 'https://edamam-recipe-search.p.rapidapi.com/search',
+    params: {q: lookup},
+    headers: {
+      'x-rapidapi-key': 'f1ca9f8871msh23516a13e3aa006p1daa57jsn9836fc2f2102',
+      'x-rapidapi-host': 'edamam-recipe-search.p.rapidapi.com'
+      }
+    };
+
+    axios.request(searchurl).then(function (response) {
+	  console.log(response.data);
+    console.log(response.data.hits[0]);
+    }).catch(function (error) {
+	      console.error(error);
+      });
     res.end();
   });
   
