@@ -11,11 +11,12 @@
     />
   </head>
   <body class="bg-dark">
-    <form action="\search" method="POST" class="bg-light border rounded w-50 mx-auto mt-5 p-3" action='/submit' method='POST'>
+    <form action="\search" method="POST" class="bg-light border rounded w-50 mx-auto mt-5 p-3">
       <h1 class="mt-2 mb-4">Search For Recipes!</h1>
-        <label for="search">Search *</label>
+        <label for="search">Search</label>
         <input
           type="text"
+          placeholder="Search..."
           class="form-control"
           id="search"
           name = "search"
@@ -24,20 +25,11 @@
       </div>
       <div class="form-group mt-3 mb-0">
         <button type="submit" class="btn btn-primary" value="Submit">Search</button>
-        <button type="reset" class="btn btn-secondary" value="Reset">Reset</button>
         <div class="form-group">
-          <label for="comments">Results</label>
-          </br>
-          <textarea class="form-control rounded-0" id="comments" rows="6" name = "comments"></textarea>
-          <div class="from-group">
             <input type="checkbox" id="signup" name="signup" checked="checked"/>
             <label for="signup">Save into box</label>
-          </div>
         </div>
       </div>
-    </div>
-   </div>
-  </div>
 </form>
 </div>
 </main>
