@@ -57,6 +57,7 @@ const routes = [
     axios.request(searchurl).then(function (response) {
 	  console.log(response.data);
     console.log(response.data.hits[0]);
+    let results = [];
     }).catch(function (error) {
 	      console.error(error);
       });
