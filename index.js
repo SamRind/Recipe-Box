@@ -57,11 +57,20 @@ const routes = [
     axios.request(searchurl).then(function (response) {
 	  console.log(response.data);
     console.log(response.data.hits[0]);
-    let results = [];
+    console.log(response.data.hits[0].recipe.label)
+    res.write(`<h1>${response.data.hits[0].recipe.label.toString()}</h1>`);
+    res.write(`<img src=${response.data.hits[0].recipe.image}/>` );
+    forEach
+    res.end();
+    results.data.hits.forEach(element =>{
+      res.write(element.recipe.label)
+    })
+    //let results = [];
     }).catch(function (error) {
 	      console.error(error);
+        res.end();
       });
-    res.end();
+    //res.end();
   });
   
   app.get('/AddNew', (req, res) => {

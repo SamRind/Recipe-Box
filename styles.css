@@ -1,0 +1,55 @@
+body {
+  background-color: #a5ccba;
+  height: 100%;
+}
+.navbar-brand {
+  margin: 0;
+  float: none;
+  text-align: center;
+  font-family: "Lucida Handwriting";
+  font-size: xxx-large;
+}
+.navbar-brand > img {
+  display: inline-block;
+}
+
+nav {
+  text-align: center;
+}
+nav ul {
+  display: inline-block;
+}
+.nav > li {
+  display: inline-block;
+}
+.nav-color {
+  color: #bc6049;
+}
+.nav-color:hover {
+  text-decoration: underline;
+  color: #a72c0e;
+}
+.nav-color:active {
+  text-decoration: underline;
+  color: #a72c0e;
+}
+.nav-color:focus {
+  text-decoration: underline;
+  color: #a72c0e;
+}
+
+form {
+  background-color: #779486;
+  width: 75%;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+  height: 100%;
+}
+.form-group {
+  display: inline-block;
+}
+#Url {
+  width: 400px;
+}
