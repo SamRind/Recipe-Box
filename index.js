@@ -75,20 +75,30 @@ const routes = [
     };
 
     axios.request(browseReq).then(function (response) {
-	    console.log(response.data[0]);
+	    //console.log(response.data[0]);
       res.write("<h1>Good Request</h1>");
-      res.write(`<h1>${response.data.name}</h1>`);
-      res.write(`<h2>Yields: ${response.data.yield}</h2>`);
-      res.write(`<p>${response.data.description}</p>`);
+      res.write(`<h1>${response.data[0].name.toString()}</h1>`);
+      res.write(`<h2>Yields: ${response.data[0].yield.toString()}</h2>`);
+      res.write(`<p>${response.data[0].description.toString()}</p>`);
+      res.write("<h3>Ingredients</h3>");
       res.write("<ul>");
-      response.data.ingredients.forEach(element => {
-        res.write(`<li>${element}</li>`)
+      response.data[0].ingredients.forEach(element => {
+        res.write(`<li>${element.toString()}</li>`);
       });
       res.write("</ul>");
+      res.write("<h3>Instructions</h3>");
+      res.write("<ul>");
+      response.data[0].instructions[0].steps.forEach(element => {
+        res.write(`<li>${element.toString()}</li>`);
+      });
+      res.write("</ul>");
+
+      console.log(response.data[0].instructions)
+
       res.end();
     }).catch(function (error) {
 	    console.error(error);
-      res.write("<h1>Bad Request</h1>")
+      res.write("<h1>Sorry, we cannot load this recipe</h1>")
       res.end();
     });
 });
