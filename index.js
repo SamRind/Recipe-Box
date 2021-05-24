@@ -21,7 +21,7 @@ app.set('view engine', 'pug');
   
   
   app.get('/search', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/index.html'));
+    res.render('search', {});
   });
   app.post('/Search', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -41,7 +41,7 @@ app.set('view engine', 'pug');
     console.log(response.data.hits[0]);
     console.log(response.data.hits[0].recipe.label)
     res.write(`<h1>${response.data.hits[0].recipe.label.toString()}</h1>`);
-    res.write(`<img src=${response.data.hits[0].recipe.image}/>` );
+    res.write(`<img src=${response.data.hits[0].recipe.image}>` );
     forEach
     res.end();
     results.data.hits.forEach(element =>{

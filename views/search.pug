@@ -1,0 +1,15 @@
+include includes/head.pug
+body.bg-info
+  include includes/nav.pug
+  main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
+    form.border.rounded.w-50.mx-auto.mt-5.p-3(action='\search' method='POST')
+        .from-group
+            h1.mt-2.mb-4 Search Recipes To Add
+            label(for='search')
+            input#search.form-control(type='text' placeholder='Search...' name='search' required='')
+        .form-group.mt-3.mb-0
+             button.btn.btn-primary(type='submit' value='Submit') Go!
+        .form-group
+            input#signup(type='checkbox' name='signup' checked='checked')
+            label(for='signup') Save into box
+    include includes/foot.pug
