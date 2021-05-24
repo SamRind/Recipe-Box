@@ -11,30 +11,12 @@ app.use(
     limit: 1024,
   })
 );
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'pug');
 
-const routes = [
-    'Search',
-    'AddNew',
-    'Browse',
-  ];
-
-  let getRoutes = () => {
-    let result = '';
-  
-    routes.forEach(
-      (elem) => (result += `<li><a href="/${elem}">${elem}</a></li>`)
-    );
-  
-    return result;
-  };
-  
   app.get('/', (req, res) => {
-    let routeResults = getRoutes();
-  
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write(`<h1>Recipe Book</h1>`);
-    res.write(`<ul> ${routeResults} </ul>`);
-    res.end();
+    res.render('home', {});
   });
   
   // Add your code here
@@ -56,12 +38,13 @@ const routes = [
   });
   
   app.get('/Browse', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/browse.html'));
+    res.render('browse', {});
+    //res.sendFile(path.join(__dirname + '/public/browse.html'));
   });
   app.post('/Browse', (req, res)=> {
     const url = "mycookbook-io1.p.rapidapi.com"
     const apiKey = "d2b5a72c7amshb4dcaa17f424b8fp18e512jsn75615a6fc853"
-    res.writeHead(200, { 'Content-Type': 'text/html' });
+    //res.writeHead(200, { 'Content-Type': 'text/html' });
     var recipe = req.body.Url;
     var browseReq = {
         method: 'POST',
@@ -76,30 +59,39 @@ const routes = [
 
     axios.request(browseReq).then(function (response) {
 	    //console.log(response.data[0]);
-      res.write("<h1>Good Request</h1>");
-      res.write(`<h1>${response.data[0].name.toString()}</h1>`);
-      res.write(`<h2>Yields: ${response.data[0].yield.toString()}</h2>`);
-      res.write(`<p>${response.data[0].description.toString()}</p>`);
-      res.write("<h3>Ingredients</h3>");
-      res.write("<ul>");
-      response.data[0].ingredients.forEach(element => {
-        res.write(`<li>${element.toString()}</li>`);
-      });
-      res.write("</ul>");
-      res.write("<h3>Instructions</h3>");
-      res.write("<ul>");
-      response.data[0].instructions[0].steps.forEach(element => {
-        res.write(`<li>${element.toString()}</li>`);
-      });
-      res.write("</ul>");
+      // res.write("<h1>Good Request</h1>");
+      // res.write(`<h1>${response.data[0].name.toString()}</h1>`);
+      // res.write(`<h2>Yields: ${response.data[0].yield.toString()}</h2>`);
+      // res.write(`<p>${response.data[0].description.toString()}</p>`);
+      // res.write("<h3>Ingredients</h3>");
+      // res.write("<ul>");
+      // response.data[0].ingredients.forEach(element => {
+      //   res.write(`<li>${element.toString()}</li>`);
+      // });
+      // res.write("</ul>");
+      // res.write("<h3>Instructions</h3>");
+      // res.write("<ul>");
+      // response.data[0].instructions[0].steps.forEach(element => {
+      //   res.write(`<li>${element.toString()}</li>`);
+      // });
+      // res.write("</ul>");
 
-      console.log(response.data[0].instructions)
+      // console.log(response.data[0].instructions)
 
-      res.end();
+      // res.end();
+      res.render('recipe', {
+        recipe: response.data[0].name,
+        description: response.data[0].description,
+        yields: response.data[0].yield,
+        ingredients: response.data[0].ingredients,
+        instructions: response.data[0].instructions[0].steps,
+      });
+
     }).catch(function (error) {
-	    console.error(error);
-      res.write("<h1>Sorry, we cannot load this recipe</h1>")
-      res.end();
+	    // console.error(error);
+      // res.write("<h1>Sorry, we cannot load this recipe</h1>")
+      // res.end();
+      res.render('norecipe', {});
     });
 });
 

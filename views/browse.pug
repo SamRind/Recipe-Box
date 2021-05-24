@@ -1,0 +1,12 @@
+include includes/head.pug
+body.bg-info
+  include includes/nav.pug
+  main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
+    form.form-inline.bg-light.border.rounded.w-50.mx-auto.mt-5.p-3(action='/Browse' method='POST')
+        h1 Browse Recipes
+        .form-group
+            label(for='Url')
+            input#Url.form-control.form-text.url-input(type='text' name='Url' required='required')
+        .form-group
+        button#Submit.btn.btn-primary(type='submit') Find Recipe
+    include includes/foot.pug
