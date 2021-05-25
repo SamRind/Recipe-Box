@@ -21,10 +21,10 @@ app.set('view engine', 'pug');
   
   
   app.get('/search', (req, res) => {
-    res.render('search', {});
+    res.render('search', {recipe:[]});
   });
-  app.post('/Search', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
+  app.post('/search', (req, res) => {
+    //res.writeHead(200, { 'Content-Type': 'text/html' });
     var lookup = req.body.search;
     var searchurl = {
     method: 'GET',
@@ -40,17 +40,22 @@ app.set('view engine', 'pug');
 	  console.log(response.data);
     console.log(response.data.hits[0]);
     console.log(response.data.hits[0].recipe.label)
-    res.write(`<h1>${response.data.hits[0].recipe.label.toString()}</h1>`);
-    res.write(`<img src=${response.data.hits[0].recipe.image}>` );
-    forEach
-    res.end();
-    results.data.hits.forEach(element =>{
-      res.write(element.recipe.label)
+    //res.write(`<h1>${response.data.hits[0].recipe.label.toString()}</h1>`);
+    //res.render('search', {results=recipelist});
+    //res.write(`<img src=${response.data.hits[0].recipe.image}>` );
+    let recipelist = [];
+    //so here create object to put stuff into
+    //forEach
+    //res.end();
+    response.data.hits.forEach(element =>{
+      //so here create object to put stuff into build object and push into list
+      recipelist.push(element.recipe.label)
     })
-    //let results = [];
+    res.render('search', {recipe: recipelist,});
     }).catch(function (error) {
 	      console.error(error);
-        res.end();
+        res.render('search', {recipe:[]});
+        //res.end();
       });
     //res.end();
   });

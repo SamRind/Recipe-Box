@@ -9,7 +9,7 @@ body.bg-info
             input#search.form-control(type='text' placeholder='Search...' name='search' required='')
         .form-group.mt-3.mb-0
              button.btn.btn-primary(type='submit' value='Submit') Go!
-        .form-group
-            input#signup(type='checkbox' name='signup' checked='checked')
-            label(for='signup') Save into box
+        ul#recipe
+            each item in recipe
+                li= item
     include includes/foot.pug
