@@ -115,7 +115,7 @@ app.set('view engine', 'pug');
 	    // console.error(error);
       // res.write("<h1>Sorry, we cannot load this recipe</h1>")
       // res.end();
-      res.render('norecipe', {});
+      res.render('error', {});
     });
 });
 
