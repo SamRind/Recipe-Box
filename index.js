@@ -58,6 +58,7 @@ app.set('view engine', 'pug');
   app.get('/AddNew', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write("<h1>Welcome!</h1>");
+    res.sendFile("Send the html file"); 
     res.end();
   });
   
