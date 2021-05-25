@@ -82,7 +82,7 @@ app.set('view engine', 'pug');
     };
 
     axios.request(browseReq).then(function (response) {
-	    //console.log(response.data[0]);
+	    console.log(response.data[0]);
       // res.write("<h1>Good Request</h1>");
       // res.write(`<h1>${response.data[0].name.toString()}</h1>`);
       // res.write(`<h2>Yields: ${response.data[0].yield.toString()}</h2>`);
@@ -103,26 +103,41 @@ app.set('view engine', 'pug');
       // console.log(response.data[0].instructions)
 
       // res.end();
+      let im = "/public/images/default-image.jpg";
+      if (response.data[0].images.length >= 1){
+        im = response.data[0].images[0];
+      }
+      console.log(im)
+      let instructions = []
+      response.data[0].instructions[0].steps.forEach(element => {
+        console.log(element)
+        console.log(element.toString())
+        instructions.push(element.toString())
+      });
       res.render('recipe', {
         recipe: response.data[0].name,
         description: response.data[0].description,
+        url: recipe,
         yields: response.data[0].yield,
+        image: im,
         ingredients: response.data[0].ingredients,
-        instructions: response.data[0].instructions[0].steps,
+        instructions: instructions,
       });
 
     }).catch(function (error) {
-	    // console.error(error);
+	    console.error(error);
       // res.write("<h1>Sorry, we cannot load this recipe</h1>")
       // res.end();
-      res.render('error', {});
+      res.render('error', {message: "We couldn't parse the specified URL, please try another url."});
     });
 });
 
   app.get('*', (req, res) => {
-    res.writeHead(404, { 'Content-Type': 'text/html' });
-    res.write("<h1>404: Page not found</h1>");
-    res.end();
+    // res.writeHead(404, { 'Content-Type': 'text/html' });
+    // res.write("<h1>404: Page not found</h1>");
+    // res.end();
+    res.render('error', {message: "404: Page not found"});
+
   });
   
   app.listen(port, () => {
