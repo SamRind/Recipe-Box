@@ -5,6 +5,7 @@ const port = process.env.PORT || 5000;
 const path = require('path');
 const axios = require("axios").default;
 const parser = require('body-parser');
+
 app.use(
   parser.urlencoded({
     extended: false,
@@ -57,8 +58,7 @@ app.set('view engine', 'pug');
   
   app.get('/AddNew', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write("<h1>Welcome!</h1>");
-    res.sendFile("Send the html file"); 
+    res.sendFile(path.join(__dirname + '/react/public/index.html'));
     res.end();
   });
   
