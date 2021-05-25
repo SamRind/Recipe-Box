@@ -21,7 +21,7 @@ app.set('view engine', 'pug');
   
   
   app.get('/search', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/index.html'));
+    res.sendFile(path.join(__dirname + '/public/search.html'));
   });
   app.post('/Search', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
