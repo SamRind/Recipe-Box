@@ -21,7 +21,11 @@ app.set('view engine', 'pug');
   
   
   app.get('/search', (req, res) => {
+<<<<<<< HEAD
     res.render('search', {recipe:[]});
+=======
+    res.sendFile(path.join(__dirname + '/public/search.html'));
+>>>>>>> master
   });
   app.post('/search', (req, res) => {
     //res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -63,6 +67,7 @@ app.set('view engine', 'pug');
   app.get('/AddNew', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write("<h1>Welcome!</h1>");
+    res.sendFile("Send the html file"); 
     res.end();
   });
   
