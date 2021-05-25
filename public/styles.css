@@ -11,8 +11,8 @@ body {
 }
 .navbar-brand > img {
   display: inline-block;
+  margin: 20px;
 }
-
 nav {
   text-align: center;
 }
