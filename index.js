@@ -21,11 +21,11 @@ app.set('view engine', 'pug');
   
   
   app.get('/search', (req, res) => {
-<<<<<<< HEAD
+
     res.render('search', {recipe:[]});
-=======
-    res.sendFile(path.join(__dirname + '/public/search.html'));
->>>>>>> master
+
+    //res.sendFile(path.join(__dirname + '/public/search.html'));
+
   });
   app.post('/search', (req, res) => {
     //res.writeHead(200, { 'Content-Type': 'text/html' });
