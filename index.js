@@ -53,9 +53,15 @@ app.set('view engine', 'pug');
     //res.end();
     response.data.hits.forEach(element =>{
       //so here create object to put stuff into build object and push into list
-      recipelist.push(element.recipe.label)
+      var tofill = {name: element.recipe.label, image: element.recipe.image, rUrl: element.recipe.url, yeild: element.recipe.yield};
+      recipelist.push(tofill)
+      ingredients = element.recipe.ingredientLines;
+      
+      
+
+      //recipelist.push(element.recipe.label)
     })
-    res.render('search', {recipe: recipelist,});
+    res.render('search', {recipe: recipelist, ingredients});
     }).catch(function (error) {
 	      console.error(error);
         res.render('search', {recipe:[]});

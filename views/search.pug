@@ -9,7 +9,14 @@ body.bg-info
             input#search.form-control(type='text' placeholder='Search...' name='search' required='')
         .form-group.mt-3.mb-0
              button.btn.btn-primary(type='submit' value='Submit') Go!
-        ul#recipe
+        ul#recipe 
             each item in recipe
-                li= item
+                li=item.name
+                //-li= img(src='item.image')
+                li= item.yeild
+                li= item.rUrl
+                ul#ingredients
+                    each item in ingredients
+                        li=item
+
     include includes/foot.pug
