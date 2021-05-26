@@ -12,10 +12,10 @@ body.bg-info
         ul#recipe 
             each item in recipe
                 li=item.name
-                //-li= img(src='item.image')
-                li= item.yeild
-                li= item.rUrl
-                ul#ingredients
+                img(src=item.image)
+                li=item.yeild 
+                li=item.rUrl
+                ul#ingredients Ingredients:
                     each item in ingredients
                         li=item
 
