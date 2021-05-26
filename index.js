@@ -65,11 +65,9 @@ app.set('view engine', 'pug');
     //res.end();
   });
   
-  app.get('/AddNew', (req, res) => {
-    console.log('AddNew'); 
-    //res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.sendFile(path.join(__dirname, '/react/public', 'index.html'));
-    //res.sendFile(path.join(__dirname, '/build', 'index.html'));
+  app.use('/AddNew', express.static(path.join(__dirname, '/react/build')));
+  app.get('/AddNew/*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/react/build/index.html'));
   });
   
   app.get('/Browse', (req, res) => {
