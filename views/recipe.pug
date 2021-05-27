@@ -1,16 +1,22 @@
 include includes/head.pug
 body.bg-info
   include includes/nav.pug
-  main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
-    h1.mb-3.text-center #{recipe}
-    p #{description}
-    h3.mb-3.text-center Yields: #{yields}
-    h2.mb-3 Ingredients:
-    ul#ingredients
-      each item in ingredients
-        li= item
-    h2.mb-3 Instructions:
-    ul#instructions 
-      each item in instructions 
-        li = item 
+  main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4.contrast-bg
+    div.row
+      div.col-sm-8
+        h1.mb-3.text-center #{recipe}
+        p #{description}
+        a #{url}
+        h3.mb-3.text-center Yields: #{yields}
+      div.col-sm-4 
+        img.img-responsive.recipe-img(src=image)
+    div.row
+      h2.mb-3 Ingredients:
+      ul#ingredients
+        each item in ingredients
+          li= item
+      h2.mb-3 Instructions:
+      ul#instructions 
+        each item in instructions 
+          li= item 
   include includes/foot.pug
