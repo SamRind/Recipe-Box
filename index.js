@@ -65,9 +65,13 @@ app.set('view engine', 'pug');
     //res.end();
   });
   
-  app.use('/AddNew', express.static(path.join(__dirname, '/react/build')));
-  app.get('/AddNew/*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/react/build/index.html'));
+  // app.use('/AddNew', express.static(path.join(__dirname, '/react/build')));
+  // app.get('/AddNew/*', (req, res) => {
+  //   res.sendFile(path.join(__dirname + '/react/build/index.html'));
+  // });
+
+  app.get('/AddNew', (req, res) => {
+    res.render('add', {});
   });
   
   app.get('/Browse', (req, res) => {
