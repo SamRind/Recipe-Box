@@ -55,7 +55,7 @@ app.set('view engine', 'pug');
       //so here create object to put stuff into build object and push into list
       var tofill = {name: element.recipe.label, image: element.recipe.image, rUrl: element.recipe.url, yeild: element.recipe.yield};
       recipelist.push(tofill)
-      ingredients = element.recipe.ingredientLines;
+      ingredients = element.recipe.ingredientLines; // !!!this only saves the last list
       
       
 
