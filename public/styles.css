@@ -53,3 +53,14 @@ form {
 #Url {
   width: 400px;
 }
+.contrast-bg {
+  background-color: #779486;
+  padding: 20px;
+  justify-content: center;
+  width: 75%;
+}
+
+.recipe-img {
+  width: 100%;
+  object-fit: contain;
+}

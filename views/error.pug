@@ -1,0 +1,12 @@
+include includes/head.pug
+body.bg-info
+  main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
+    include includes/nav.pug
+    .row
+      .col-sm-6
+        img.img-responsive.recipe-img(src='../images/crazy_kitchen_error.png')
+      .col-sm-6
+        h3.text-center Something went wrong!
+        p.text-center Don&apos;t worry it was on our end..
+        h2.text-center #{message}
+    include includes/foot.pug 
