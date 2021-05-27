@@ -9,14 +9,35 @@ body.bg-info
             input#search.form-control(type='text' placeholder='Search...' name='search' required='')
         .form-group.mt-3.mb-0
              button.btn.btn-primary(type='submit' value='Submit') Go!
-        ul#recipe 
+        table(style='width:10%', border='1')
+            tbody 
+                ul#recipe
+                    each item in recipe 
+                        tr 
+                            td 
+                                img(src=item.image)
+                            td #{item.name}
+                            td #{item.yeild}
+                            td #{item.rUrl}
+                            td
+                                ul#ingredients Ingredients:
+                                    each item in ingredients
+                                        li= item
+
+
+    
+        
+        
+        
+        
+        
+        //-ul#recipe 
             each item in recipe
-                li=item.name
                 img(src=item.image)
-                li=item.yeild 
-                li=item.rUrl
+                li= item.yeild 
+                li= item.rUrl
                 ul#ingredients Ingredients:
                     each item in ingredients
-                        li=item
+                            li= item
 
     include includes/foot.pug
