@@ -20,6 +20,10 @@ app.set('view engine', 'pug');
   });
   
   
+  app.get('/About', (req, res) => {
+    res.render('about', {})
+  });
+
   app.get('/search', (req, res) => {
 
     res.render('search', {recipe:[]});
@@ -92,7 +96,7 @@ app.set('view engine', 'pug');
     };
 
     axios.request(browseReq).then(function (response) {
-	    console.log(response.data[0]);
+	    // console.log(response.data[0]);
       // res.write("<h1>Good Request</h1>");
       // res.write(`<h1>${response.data[0].name.toString()}</h1>`);
       // res.write(`<h2>Yields: ${response.data[0].yield.toString()}</h2>`);
@@ -117,13 +121,13 @@ app.set('view engine', 'pug');
       if (response.data[0].images.length >= 1){
         im = response.data[0].images[0];
       }
-      console.log(im)
-      let instructions = []
-      response.data[0].instructions[0].steps.forEach(element => {
-        console.log(element)
-        console.log(element.toString())
-        instructions.push(element.toString())
-      });
+      // console.log(im)
+      // let instructions = []
+      // response.data[0].instructions[0].steps.forEach(element => {
+      //   console.log(element)
+      //   console.log(element.toString())
+      //   instructions.push(element.toString())
+      // });
       res.render('recipe', {
         recipe: response.data[0].name,
         description: response.data[0].description,
@@ -131,7 +135,8 @@ app.set('view engine', 'pug');
         yields: response.data[0].yield,
         image: im,
         ingredients: response.data[0].ingredients,
-        instructions: instructions,
+        //instructions: instructions,
+        instructions: response.data[0].instructions[0].steps,
       });
 
     }).catch(function (error) {
@@ -140,6 +145,10 @@ app.set('view engine', 'pug');
       // res.end();
       res.render('error', {message: "We couldn't parse the specified URL, please try another url."});
     });
+});
+
+app.get("/MyBox", (req, res) => {
+  res.render('mybox', {})
 });
 
   app.get('*', (req, res) => {
