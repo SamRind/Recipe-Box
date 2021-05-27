@@ -48,22 +48,22 @@ app.set('view engine', 'pug');
     //res.render('search', {results=recipelist});
     //res.write(`<img src=${response.data.hits[0].recipe.image}>` );
     let recipelist = [];
-    let ingred = [];
+    //let ingred = [];
     //so here create object to put stuff into
     //forEach
     //res.end();
     response.data.hits.forEach(element =>{
       //so here create object to put stuff into build object and push into list
       //ingred.push(ingredientLines);
-      var tofill = {name: element.recipe.label, image: element.recipe.image, rUrl: element.recipe.url, yeild: element.recipe.yield};
+      var tofill = {name: element.recipe.label, image: element.recipe.image, rUrl: element.recipe.url, yeild: element.recipe.yield, ingredients: element.recipe.ingredientLines};
       recipelist.push(tofill);
-      ingredients = element.recipe.ingredientLines; // !!!this only saves the last list
+      //ingredients = element.recipe.ingredientLines; // !!!this only saves the last list
       
       
 
       //recipelist.push(element.recipe.label)
     })
-    res.render('search', {recipe: recipelist, ingredients: ingredients});
+    res.render('search', {recipe: recipelist});
     }).catch(function (error) {
 	      console.error(error);
         res.render('search', {recipe:[]});

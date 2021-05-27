@@ -8,21 +8,23 @@ body.bg-info
             label(for='search')
             input#search.form-control(type='text' placeholder='Search...' name='search' required='')
         .form-group.mt-3.mb-0
-             button.btn.btn-primary(type='submit' value='Submit') Go!
-        table(style='width:10%', border='1')
+            button.btn.btn-primary(type='submit' value='Submit') Go!
+        table(style='width:100%')
+
             tbody 
                 ul#recipe
                     each item in recipe 
                         tr 
                             td 
-                                img(src=item.image)
-                            td #{item.name}
-                            td #{item.yeild}
-                            td #{item.rUrl}
+                                img(src=item.image, style='max-height: 100px; max-width: 100px;')
+                            td Name: #{item.name}
+                            td Yeild: #{item.yeild}
+                            td 
+                                a(href=item.rUrl) Link
                             td
                                 ul#ingredients Ingredients:
-                                    each item in ingredients
-                                        li= item
+                                    each thing in item.ingredients
+                                        li= thing
 
 
     
