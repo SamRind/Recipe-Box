@@ -1,12 +1,12 @@
-const mongoose = require('mangoose')
-const passportLocalMangoose = require('passport-local-mangoose')
+const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose')
 
-var user = {name: "", Add: [String]}
+//var users = {name: "", Add: [String]}
 
-const userSchema = new mangoose.Schema({
+const userSchema = new mongoose.Schema({
     username:{
         type: String, 
-        minLength: 5
+        minLength: 3
     },
 
     password: {
@@ -15,5 +15,5 @@ const userSchema = new mangoose.Schema({
     
 })
 
-userSchema.plugin(passportLocalMangoose)
-module.exports = mangoose.model("User", userSchema)
+userSchema.plugin(passportLocalMongoose)
+module.exports = mongoose.model("user", userSchema)

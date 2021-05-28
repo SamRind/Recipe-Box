@@ -1,8 +1,9 @@
-const mangoose = require("mongoose")
+const mongoose = require('mongoose')
 
-const sampleSchema = new mangoose.Schema({
+const sampleSchema = new mongoose.Schema({
     Add: {
         type: String
+    }
 });
 
-module.exports = mangoose.model("sample", sampleSchema); 
+module.exports = mongoose.model("sample", sampleSchema); 

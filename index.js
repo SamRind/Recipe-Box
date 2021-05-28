@@ -13,22 +13,24 @@ const LocalStrategy = require('passport-local')
 //Starting database portion here 
 require("dotenv").config()
 const mongoose = require("mongoose")
+mongoose.connect(process.env.DATABASE, {useUnifiedTopology: true, useNewUrlParser: true})
+require("./test/sample")
+require("./test/users")
+
 const users = require('./test/users')
 const  { connect } = require('http2')
-mangoose.connect(process.env.DATABASE, {useUnifiedTopology: true, useNewUrlParser: true})
 
-mangoose.connection.on("error", (err) => {
+mongoose.connection.on("error", (err) => {
   console.log("Error: " + err.message)
 })
 
-mangoose.connection.once("open", () => {
+mongoose.connection.once("open", () => {
   console.log("MongoDB connected successfully")
 })
 
-require("/test/sample")
-require("./test/users")
-const sample = mangoose.model("sample")
-const user = mangoose.model("user")
+
+const sample = mongoose.model("sample")
+const user = mongoose.model("users")
 ///Database portion above 
 
 //Password authencation 
@@ -68,7 +70,7 @@ app.set('view engine', 'pug');
     user.register(new user({username: req.body.username, }), req.body.password, (err, user) => {
       if(err){
         console.log(err)
-        res.sendFile(--dirname + '/login.html') //maybe pug??
+        res.sendFile(__dirname + '/login.html') //maybe pug??
       }
       passport.authenticate("local")(req, res, () => {
         res.sendFile(__dirname, '/index.html')
