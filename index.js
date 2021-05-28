@@ -6,6 +6,23 @@ const path = require('path');
 const axios = require("axios").default;
 const parser = require('body-parser');
 
+
+//Starting database portion here 
+require("dotenv").config()
+const mongoose = require("mongoose")
+const  { connect } = require('http2')
+mangoose.connect(process.env.DATABASE, {useUnifiedTopology: true, useNewUrlParser: true})
+
+mangoose.connection.on("error", (err) => {
+  console.log("Error: " + err.message)
+})
+
+mangoose.connection.once("open", () => {
+  console.log("MongoDB connected successfully")
+})
+
+///Database portion above 
+
 app.use(
   parser.urlencoded({
     extended: false,
@@ -15,6 +32,7 @@ app.use(
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
+
 
   app.get('/', (req, res) => {
     res.render('home', {});
@@ -26,9 +44,7 @@ app.set('view engine', 'pug');
   });
 
   app.get('/search', (req, res) => {
-
     res.render('search', {recipe:[]});
-
     //res.sendFile(path.join(__dirname + '/public/search.html'));
 
   });
