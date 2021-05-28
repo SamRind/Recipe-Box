@@ -5,4 +5,4 @@ const sampleSchema = new mangoose.Schema({
         type: String
 });
 
-module.exports = mangoose.test("sample", sampleSchema); 
+module.exports = mangoose.model("sample", sampleSchema); 

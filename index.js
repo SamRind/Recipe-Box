@@ -5,11 +5,15 @@ const port = process.env.PORT || 5000;
 const path = require('path');
 const axios = require("axios").default;
 const parser = require('body-parser');
+const session = require('express-session')
+const passport = require('passport')
+const LocalStrategy = require('passport-local')
 
 
 //Starting database portion here 
 require("dotenv").config()
 const mongoose = require("mongoose")
+const users = require('./test/users')
 const  { connect } = require('http2')
 mangoose.connect(process.env.DATABASE, {useUnifiedTopology: true, useNewUrlParser: true})
 
@@ -21,7 +25,26 @@ mangoose.connection.once("open", () => {
   console.log("MongoDB connected successfully")
 })
 
+require("/test/sample")
+require("./test/users")
+const sample = mangoose.model("sample")
+const user = mangoose.model("user")
 ///Database portion above 
+
+//Password authencation 
+passport.serializeUser(user.serializeUser());
+passport.deserializeUser(user.deserializeUser());
+app.use(passport.initialize()); 
+app.use(passport.session()); 
+app.use(session({
+  secret: "Welcome", 
+  resave: false, 
+  saveUninitialized: false, 
+}))
+
+passport.use(new LocalStrategy(user.authenticate()))
+
+//Passoword authentications 
 
 app.use(
   parser.urlencoded({
@@ -37,6 +60,22 @@ app.set('view engine', 'pug');
   app.get('/', (req, res) => {
     res.render('home', {});
   });
+
+  //Registration for user
+  app.post('/register', (req, res) => {
+    console.log("username:" + req.body.username)
+    console.log("Password:" + req.body.password)
+    user.register(new user({username: req.body.username, }), req.body.password, (err, user) => {
+      if(err){
+        console.log(err)
+        res.sendFile(--dirname + '/login.html') //maybe pug??
+      }
+      passport.authenticate("local")(req, res, () => {
+        res.sendFile(__dirname, '/index.html')
+      })
+    })
+  })
+  //Registration for user 
   
   
   app.get('/About', (req, res) => {
@@ -181,4 +220,6 @@ app.get("/MyBox", (req, res) => {
   app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
   });
+
+
   
