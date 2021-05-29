@@ -8,17 +8,23 @@ const parser = require('body-parser');
 const session = require('express-session')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
+const http = require('http');
 
 
 //Starting database portion here 
 require("dotenv").config()
 const mongoose = require("mongoose")
-mongoose.connect(process.env.DATABASE, {useUnifiedTopology: true, useNewUrlParser: true})
-require("./test/sample")
-require("./test/users")
+mongoose.connect("mongodb+srv://orind:database21!@cluster0.mc5cu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{
+  useUnifiedTopology: true, 
+  useNewUrlParser: true,
+});
 
-const users = require('./test/users')
-const  { connect } = require('http2')
+//require("./test/sample")
+//require("./test/users")
+
+//const users = require('./test/users')
+//const sample = require('/test/sample');
+//const  { connect } = require('http2')
 
 mongoose.connection.on("error", (err) => {
   console.log("Error: " + err.message)
@@ -28,23 +34,24 @@ mongoose.connection.once("open", () => {
   console.log("MongoDB connected successfully")
 })
 
+//const sample = mongoose.model("sample")
+//const user = mongoose.model("users")
 
-const sample = mongoose.model("sample")
-const user = mongoose.model("users")
 ///Database portion above 
 
 //Password authencation 
-passport.serializeUser(user.serializeUser());
-passport.deserializeUser(user.deserializeUser());
-app.use(passport.initialize()); 
-app.use(passport.session()); 
-app.use(session({
-  secret: "Welcome", 
-  resave: false, 
-  saveUninitialized: false, 
-}))
+// passport.serializeUser(user.serializeUser());
+// passport.deserializeUser(user.deserializeUser());
+// app.use(passport.initialize()); 
+// app.use(passport.session()); 
+// app.use(session({
+//   secret: "Welcome", 
+//   resave: false, 
+//   saveUninitialized: false, 
+// }))
 
-passport.use(new LocalStrategy(user.authenticate()))
+// passport.use(new LocalStrategy(user.authenticate()))
+
 
 //Passoword authentications 
 
@@ -219,9 +226,9 @@ app.get("/MyBox", (req, res) => {
 
   });
   
-  app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-  });
+  const server = http.createServer(app);
+    server.listen(port, () => console.log(`Server running at http://localhost:${port}`)); 
 
+  
 
   
