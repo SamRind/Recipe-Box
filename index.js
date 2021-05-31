@@ -246,6 +246,10 @@ app.get("/MyBox", (req, res) => {
   res.render('mybox', {})
 });
 
+  app.get("/SignUp", (req, res) => {
+      res.render('signup', {})
+  });
+
   app.get('*', (req, res) => {
     // res.writeHead(404, { 'Content-Type': 'text/html' });
     // res.write("<h1>404: Page not found</h1>");
