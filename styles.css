@@ -47,9 +47,11 @@ form {
   padding: 10px;
   height: 100%;
 }
+
 .form-group {
   display: inline-block;
 }
+
 #Url {
   width: 400px;
 }
