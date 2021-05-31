@@ -161,11 +161,15 @@ app.set('view engine', 'pug');
 
   app.get("/MyBox", (req, res) => {
     res.render('mybox', {})
-      });
+  
+  });
 
   app.get("/LogIn", (req, res) => {
     res.render('login', {})
+    //needs to route to mybox after click 
   });
+
+  
 
   app.get('*', (req, res) => {
     // res.writeHead(404, { 'Content-Type': 'text/html' });

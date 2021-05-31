@@ -17,16 +17,17 @@ body.bg-info
                         tr 
                             td 
                                 img(src=item.image, style='max-height: 100px; max-width: 100px;')
-                            td Name: #{item.name}
+                            td #{item.name}
                             td Yeild: #{item.yeild}
                             td 
-                                a(href=item.rUrl) Link
+                                a(href=item.rUrl) Click to See Instructions
                             td
                                 ul#ingredients Ingredients:
                                     each thing in item.ingredients
                                         li= thing
-
-
+                            td 
+                                .form-group.mt-3.mb-0
+                                    button.btn.btn-primary(type='submit' value='Submit') Add Recipe to Box
     
         
         
