@@ -1,5 +1,6 @@
 //Express routing here to the three pages
 const express = require('express');
+const cors = require('cors')
 const app = express();
 const port = process.env.PORT || 5000;
 const path = require('path');
