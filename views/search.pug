@@ -2,7 +2,7 @@ include includes/head.pug
 body.bg-info
   include includes/nav.pug
   main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
-    form.border.rounded.w-50.mx-auto.mt-5.p-3(action='\search' method='POST')
+    form.border.rounded.w-50.mx-auto.mt-5.p-3(action='/search' method='POST')
         .from-group
             h1.mt-2.mb-4 Search Recipes To Add
             label(for='search')
