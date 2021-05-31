@@ -62,7 +62,8 @@ app.set('view engine', 'pug');
       //ingred.push(ingredientLines);
       var tofill = {name: element.recipe.label, image: element.recipe.image, rUrl: element.recipe.url, yeild: element.recipe.yield, ingredients: element.recipe.ingredientLines};
       recipelist.push(tofill);
-      //ingredients = element.recipe.ingredientLines; // !!!this only saves the last list
+
+    
       
       
 
@@ -158,9 +159,13 @@ app.set('view engine', 'pug');
     });
 });
 
-app.get("/MyBox", (req, res) => {
-  res.render('mybox', {})
-});
+  app.get("/MyBox", (req, res) => {
+    res.render('mybox', {})
+      });
+
+  app.get("/LogIn", (req, res) => {
+    res.render('login', {})
+  });
 
   app.get('*', (req, res) => {
     // res.writeHead(404, { 'Content-Type': 'text/html' });
