@@ -26,6 +26,13 @@ mongoose.connect("mongodb+srv://orind:database21!@cluster0.mc5cu.mongodb.net/myF
 //const sample = require('/test/sample');
 //const  { connect } = require('http2')
 
+//require("./model/add.js")
+//require("./test/users")
+
+//const users = require('./test/users')
+//const sample = require('/test/sample');
+//const  { connect } = require('http2')
+
 mongoose.connection.on("error", (err) => {
   console.log("Error: " + err.message)
 })
@@ -141,6 +148,27 @@ app.set('view engine', 'pug');
   app.get('/AddNew', (req, res) => {
     res.render('add', {});
   });
+
+  const recipe = require("./model/recipe.js")
+
+  app.post('/submit', (req, res) => {
+  // res.write(`<p>Name: ${req.body.name}</p>`);
+  // res.write(`<p>Ingredient: ${req.body.Ingredients}</p>`);
+  // res.write(`<p>Prep: ${req.body.Prep}</p>`);
+  // let Bookmark = (req.body.signup) ? 'Bookmark my recipe' : 'No, thank you.';
+  // res.write(`<p> : ${Bookmark}</p>`);
+  // res.end();
+  const Add = new recipe({
+                    _id: new mongoose.Types.ObjectId(),
+                    name: req.body.name,
+                    Ingredients: req.body.Ingredients, 
+                    Prep: req.body.Prep,
+                    Bookmark: req.body.Bookmark,
+                })
+                Add.save();
+                res.end(); 
+});
+
   
   app.get('/Browse', (req, res) => {
     res.render('browse', {});
