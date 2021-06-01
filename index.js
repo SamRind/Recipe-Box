@@ -167,7 +167,10 @@ app.set('view engine', 'pug');
 
   app.get("/LogIn", (req, res) => {
     res.render('login', {})
-    //needs to route to mybox after click 
+  });
+
+  app.post("/LogIn", (req, res) => {
+    res.render('mybox',{})
   });
 
   
