@@ -9,10 +9,7 @@ const session = require('express-session')
 const passport = require('passport'); 
 const LocalStrategy = require('passport-local')
 const http = require('http');
-const router = require('express'); 
-const authenticate = require('./model/authenticate');
-const indexRouter = require('./model/user'); 
-const usersRouter = require('./routes/users'); 
+//const router = require('express'); 
 
 // app.use(passport.initialize());
 // app.use(passport.session());
@@ -85,31 +82,41 @@ mongoose.connection.once("open", () => {
 //   saveUninitialized: false, 
 // }))
 
-// passport.use(new LocalStrategy(user.authenticate()))
+// // passport.use(new LocalStrategy(user.authenticate()))
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// //app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+
+// // Basic Authentication for session and cookies
+// function auth (req, res, next) {
+//   console.log(req.user);
+
+//   if (!req.user) {
+//     var err = new Error('You are not authenticated!');
+//     err.status = 403;
+//     next(err);
+//   }
+//   else {
+//     next();
+//   }
+// }
+// //app.use('/login', auth);
+// app.use('/login', require('./routes/users')); 
+// //Passoword authentications 
+
+app.use(session({
+  secret:"our_little secret",
+  resave: false,
+  saveUninitialized: false
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
-// Basic Authentication for session and cookies
-function auth (req, res, next) {
-  console.log(req.user);
-
-  if (!req.user) {
-    var err = new Error('You are not authenticated!');
-    err.status = 403;
-    next(err);
-  }
-  else {
-    next();
-  }
-}
-app.use(auth);
-
-//Passoword authentications 
-
-
+app.use('/api/users', require('./routes/user'));
 
 app.use(
   parser.urlencoded({
@@ -297,6 +304,10 @@ app.get("/MyBox", (req, res) => {
 
   app.get("/SignUp", (req, res) => {
       res.render('signup', {})
+  });
+
+  app.get("/LogIn", (req, res) => {
+    res.render('login', {})
   });
 
   app.get('*', (req, res) => {

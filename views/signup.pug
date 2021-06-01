@@ -6,10 +6,13 @@ body.bg-info
             h1.mt-2.mb-4 
                 .form-sign 
                     label(for='name') Name* 
-                    input#name.form-control(type='text' name='name' required='')
+                    input#name.form-control(type='text' name='name' placeholder = 'first, last' required='')
                 .form-sign 
                     label(for='email') Email* 
                     input#email.form-control(type='email' name='email' placeholder='Enter email' required='')
+                .form-sign 
+                    label(for='password') Password * 
+                    input#email.form-control(type='password' name='password' placeholder='password' required='')
                 .form-sign 
                     label(for='Comments') Comments?
                     textarea#Comments.form-control.rounded-0(name='Comments' rows='3')
