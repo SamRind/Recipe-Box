@@ -6,10 +6,36 @@ const path = require('path');
 const axios = require("axios").default;
 const parser = require('body-parser');
 const session = require('express-session')
-const passport = require('passport')
+const passport = require('passport'); 
 const LocalStrategy = require('passport-local')
 const http = require('http');
+const router = require('express'); 
+const authenticate = require('./model/authenticate');
+const indexRouter = require('./model/user'); 
+const usersRouter = require('./routes/users'); 
 
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+
+// // Basic Authentication for session and cookies
+// function auth (req, res, next) {
+//   console.log(req.user);
+
+//   if (!req.user) {
+//     var err = new Error('You are not authenticated!');
+//     err.status = 403;
+//     next(err);
+//   }
+//   else {
+//     next();
+//   }
+// }
+// app.use(auth);
+//...
+//app.use(express.static(path.join(__dirname, 'public')));
 
 //Starting database portion here 
 require("dotenv").config()
@@ -41,6 +67,8 @@ mongoose.connection.once("open", () => {
   console.log("MongoDB connected successfully")
 })
 
+
+
 //const sample = mongoose.model("sample")
 //const user = mongoose.model("users")
 
@@ -58,9 +86,30 @@ mongoose.connection.once("open", () => {
 // }))
 
 // passport.use(new LocalStrategy(user.authenticate()))
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+// Basic Authentication for session and cookies
+function auth (req, res, next) {
+  console.log(req.user);
+
+  if (!req.user) {
+    var err = new Error('You are not authenticated!');
+    err.status = 403;
+    next(err);
+  }
+  else {
+    next();
+  }
+}
+app.use(auth);
 
 //Passoword authentications 
+
+
 
 app.use(
   parser.urlencoded({
@@ -77,21 +126,21 @@ app.set('view engine', 'pug');
     res.render('home', {});
   });
 
-  //Registration for user
-  app.post('/register', (req, res) => {
-    console.log("username:" + req.body.username)
-    console.log("Password:" + req.body.password)
-    user.register(new user({username: req.body.username, }), req.body.password, (err, user) => {
-      if(err){
-        console.log(err)
-        res.sendFile(__dirname + '/login.html') //maybe pug??
-      }
-      passport.authenticate("local")(req, res, () => {
-        res.sendFile(__dirname, '/index.html')
-      })
-    })
-  })
-  //Registration for user 
+  // //Registration for user
+  // app.post('/register', (req, res) => {
+  //   console.log("username:" + req.body.username)
+  //   console.log("Password:" + req.body.password)
+  //   user.register(new user({username: req.body.username, }), req.body.password, (err, user) => {
+  //     if(err){
+  //       console.log(err)
+  //       res.sendFile(__dirname + '/login.html') //maybe pug??
+  //     }
+  //     passport.authenticate("local")(req, res, () => {
+  //       res.sendFile(__dirname, '/index.html')
+  //     })
+  //   })
+  // })
+  //Reg)istration for user 
   
   
   app.get('/About', (req, res) => {
