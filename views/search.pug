@@ -1,15 +1,46 @@
 include includes/head.pug
-body.bg-info
+body
   include includes/nav.pug
   main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
-    form.border.rounded.w-50.mx-auto.mt-5.p-3(action='\search' method='POST')
+    form.border.rounded.w-50.mx-auto.mt-5.p-3(action='/search' method='POST')
         .from-group
             h1.mt-2.mb-4 Search Recipes To Add
             label(for='search')
             input#search.form-control(type='text' placeholder='Search...' name='search' required='')
         .form-group.mt-3.mb-0
             button.btn.btn-primary(type='submit' value='Submit') Go!
-        ul#recipe
+        table(style='width:100%')
+
+            tbody 
+                ul#recipe
+                    each item in recipe 
+                        tr 
+                            td 
+                                img(src=item.image, style='max-height: 100px; max-width: 100px;')
+                            td #{item.name}
+                            td Yeild: #{item.yeild}
+                            td 
+                                a(href=item.rUrl) Click to See Instructions
+                            td
+                                ul#ingredients Ingredients:
+                                    each thing in item.ingredients
+                                        li= thing
+                            td 
+                                .form-group.mt-3.mb-0
+                                    button.btn.btn-primary(type='submit' value='Submit') Add Recipe to Box
+    
+        
+        
+        
+        
+        
+        //-ul#recipe 
             each item in recipe
-                li= item
+                img(src=item.image)
+                li= item.yeild 
+                li= item.rUrl
+                ul#ingredients Ingredients:
+                    each item in ingredients
+                            li= item
+
     include includes/foot.pug

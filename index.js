@@ -1,5 +1,6 @@
 //Express routing here to the three pages
 const express = require('express');
+const cors = require('cors')
 const app = express();
 const port = process.env.PORT || 5000;
 const path = require('path');
@@ -180,14 +181,23 @@ app.set('view engine', 'pug');
     //res.render('search', {results=recipelist});
     //res.write(`<img src=${response.data.hits[0].recipe.image}>` );
     let recipelist = [];
+    //let ingred = [];
     //so here create object to put stuff into
     //forEach
     //res.end();
     response.data.hits.forEach(element =>{
       //so here create object to put stuff into build object and push into list
-      recipelist.push(element.recipe.label)
+      //ingred.push(ingredientLines);
+      var tofill = {name: element.recipe.label, image: element.recipe.image, rUrl: element.recipe.url, yeild: element.recipe.yield, ingredients: element.recipe.ingredientLines};
+      recipelist.push(tofill);
+
+    
+      
+      
+
+      //recipelist.push(element.recipe.label)
     })
-    res.render('search', {recipe: recipelist,});
+    res.render('search', {recipe: recipelist});
     }).catch(function (error) {
 	      console.error(error);
         res.render('search', {recipe:[]});
@@ -311,9 +321,20 @@ app.set('view engine', 'pug');
     });
 });
 
-app.get("/MyBox", (req, res) => {
-  res.render('mybox', {})
-});
+  app.get("/MyBox", (req, res) => {
+    res.render('mybox', {})
+  
+  });
+
+  app.get("/LogIn", (req, res) => {
+    res.render('login', {})
+  });
+
+  app.post("/LogIn", (req, res) => {
+    res.render('mybox',{})
+  });
+
+  
 
   app.get("/SignUp", (req, res) => {
       res.render('signup', {})

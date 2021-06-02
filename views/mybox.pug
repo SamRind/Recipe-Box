@@ -1,6 +1,9 @@
 include includes/head.pug
-body.bg-info
+include includes/nav.pug
+body
   main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
-    include includes/nav.pug
-    
+    form.border.rounded.w-50.mx-auto.mt-5.p-3(action='/search' method='POST')
+        .from-group
+            h1.mt-2.mb-4 Contents of Your Recipe Box
+            label(for='mybox')
     include includes/foot.pug 
