@@ -1,0 +1,25 @@
+include includes/head.pug
+body.bg-info
+    include includes/nav.pug
+    main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
+        form.bg-light.border.rounded.w-50.mx-auto.mt-5.p-3(name='Signup' action='/submituser' method='POST')
+            h1.mt-2.mb-4 
+                .form-sign 
+                    label(for='name') Name* 
+                    input#name.form-control(type='text' name='name' placeholder = 'first, last' required='')
+                .form-sign 
+                    label(for='email') Email* 
+                    input#email.form-control(type='email' name='email' placeholder='Enter email' required='')
+                .form-sign 
+                    label(for='password') Password * 
+                    input#email.form-control(type='password' name='password' placeholder='password' required='')
+                .form-sign 
+                    label(for='role') role ?
+                    textarea#Comments.form-control.rounded-0(name='role' rows='3')
+                .form-sign 
+                    input#signup(type='checkbox' name='signup' checked='checked')
+                    label(for='signup') Sign up for the newsletter
+                .form-sign.mt-3.mb-0
+                    button.btn.btn-primary(type='submit')  Submit
+                    button.btn.btn-secondary(type='reset') Reset
+    include includes/foot.pug

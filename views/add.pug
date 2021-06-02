@@ -2,21 +2,21 @@ include includes/head.pug
 body
     include includes/nav.pug
     main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
-        form.bg-light.border.rounded.w-50.mx-auto.mt-5.p-3(name='ContactForm' action='/submit' method='POST')
+        form.border.rounded.w-50.mx-auto.mt-5.p-3(action='/submit' method='POST')
             h1.mt-2.mb-4 
-            .form-group
+            .form-add
                 label(for='name') Title of the Recipe 
                 input#name.form-control(type='text' name='name' required='')
-            .form-group
+            .form-add
                 label(for='Ingredients') Ingredients
                 textarea#Comments.form-control.rounded-0(name='Ingredients' rows='5')
-            .form-group
+            .form-add
                 label(for='Prep') Prep
                 textarea#Comments.form-control.rounded-0(name='Prep' rows='5')
-            .form-group
+            .form-add
                 input#signup(type='checkbox' name='signup' checked='checked')
                 label(for='signup') Bookmark my recipe 
-            .form-group.mt-3.mb-0
+            .form-add.mt-3.mb-0
             button.btn.btn-primary(type='save')  Save
             button.btn.btn-secondary(type='clear') Clear
         include includes/foot.pug

@@ -6,6 +6,118 @@ const port = process.env.PORT || 5000;
 const path = require('path');
 const axios = require("axios").default;
 const parser = require('body-parser');
+const session = require('express-session')
+const passport = require('passport'); 
+const LocalStrategy = require('passport-local')
+const http = require('http');
+
+//const router = require('express'); 
+
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+
+// // Basic Authentication for session and cookies
+// function auth (req, res, next) {
+//   console.log(req.user);
+
+//   if (!req.user) {
+//     var err = new Error('You are not authenticated!');
+//     err.status = 403;
+//     next(err);
+//   }
+//   else {
+//     next();
+//   }
+// }
+// app.use(auth);
+//...
+//app.use(express.static(path.join(__dirname, 'public')));
+
+//Starting database portion here 
+require("dotenv").config()
+const mongoose = require("mongoose")
+mongoose.connect("mongodb+srv://orind:database21!@cluster0.mc5cu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true 
+});
+
+//require("./test/sample")
+//require("./test/users")
+
+//const users = require('./test/users')
+//const sample = require('/test/sample');
+//const  { connect } = require('http2')
+
+//require("./model/add.js")
+//require("./test/users")
+
+//const users = require('./test/users')
+//const sample = require('/test/sample');
+//const  { connect } = require('http2')
+
+mongoose.connection.on("error", (err) => {
+  console.log("Error: " + err.message)
+})
+
+mongoose.connection.once("open", () => {
+  console.log("MongoDB connected successfully")
+})
+
+
+
+//const sample = mongoose.model("sample")
+//const user = mongoose.model("users")
+
+///Database portion above 
+
+//Password authencation 
+// passport.serializeUser(user.serializeUser());
+// passport.deserializeUser(user.deserializeUser());
+// app.use(passport.initialize()); 
+// app.use(passport.session()); 
+// app.use(session({
+//   secret: "Welcome", 
+//   resave: false, 
+//   saveUninitialized: false, 
+// }))
+
+// // passport.use(new LocalStrategy(user.authenticate()))
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// //app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+
+// // Basic Authentication for session and cookies
+// function auth (req, res, next) {
+//   console.log(req.user);
+
+//   if (!req.user) {
+//     var err = new Error('You are not authenticated!');
+//     err.status = 403;
+//     next(err);
+//   }
+//   else {
+//     next();
+//   }
+// }
+// //app.use('/login', auth);
+// app.use('/login', require('./routes/users')); 
+// //Passoword authentications
+  app.use(session({
+  secret:"our_little secret",
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/api/users', require('./routes/user'));
 
 app.use(
   parser.urlencoded({
@@ -17,9 +129,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 
+
   app.get('/', (req, res) => {
     res.render('home', {});
   });
+
+  // //Registration for user
+  // app.post('/register', (req, res) => {
+  //   console.log("username:" + req.body.username)
+  //   console.log("Password:" + req.body.password)
+  //   user.register(new user({username: req.body.username, }), req.body.password, (err, user) => {
+  //     if(err){
+  //       console.log(err)
+  //       res.sendFile(__dirname + '/login.html') //maybe pug??
+  //     }
+  //     passport.authenticate("local")(req, res, () => {
+  //       res.sendFile(__dirname, '/index.html')
+  //     })
+  //   })
+  // })
+  //Reg)istration for user 
   
   
   app.get('/About', (req, res) => {
@@ -27,9 +156,7 @@ app.set('view engine', 'pug');
   });
 
   app.get('/search', (req, res) => {
-
     res.render('search', {recipe:[]});
-
     //res.sendFile(path.join(__dirname + '/public/search.html'));
 
   });
@@ -87,7 +214,40 @@ app.set('view engine', 'pug');
   app.get('/AddNew', (req, res) => {
     res.render('add', {});
   });
-  
+
+  const recipe = require("./model/recipe.js")
+
+  app.post('/submit', (req, res) => {
+  // res.write(`<p>Name: ${req.body.name}</p>`);
+  // res.write(`<p>Ingredient: ${req.body.Ingredients}</p>`);
+  // res.write(`<p>Prep: ${req.body.Prep}</p>`);
+  // let Bookmark = (req.body.signup) ? 'Bookmark my recipe' : 'No, thank you.';
+  // res.write(`<p> : ${Bookmark}</p>`);
+  // res.end();
+  const Add = new recipe({
+                    _id: new mongoose.Types.ObjectId(),
+                    name: req.body.name,
+                    Ingredients: req.body.Ingredients, 
+                    Prep: req.body.Prep,
+                    Bookmark: req.body.Bookmark,
+                })
+                Add.save();
+                res.end(); 
+});
+
+  const user = require("./model/model.js")
+  app.post('/submituser', (req, res) => {
+ const Add = new user({
+                    _id: new mongoose.Types.ObjectId(),
+                    username: req.body.name,
+                    email: req.body.email, 
+                    password: req.body.password,
+                    role: req.body.role,
+                })
+                Add.save();
+                res.end(); 
+});
+
   app.get('/Browse', (req, res) => {
     res.render('browse', {});
     //res.sendFile(path.join(__dirname + '/public/browse.html'));
@@ -175,6 +335,10 @@ app.set('view engine', 'pug');
 
   
 
+  app.get("/SignUp", (req, res) => {
+      res.render('signup', {})
+  });
+
   app.get('*', (req, res) => {
     // res.writeHead(404, { 'Content-Type': 'text/html' });
     // res.write("<h1>404: Page not found</h1>");
@@ -183,7 +347,9 @@ app.set('view engine', 'pug');
 
   });
   
-  app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-  });
+  const server = http.createServer(app);
+    server.listen(port, () => console.log(`Server running at http://localhost:${port}`)); 
+
+  
+
   
