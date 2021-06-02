@@ -35,14 +35,14 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/login_success', (req, res) => {
-    console.log("geldim successe");
+    console.log("Login was a big success");
     return res.json({
         loginSuccess: true
     });
 });
 
 router.get('/login_error', (req, res) => {
-    console.log("geldim errora");
+    console.log("Login error it is! ");
     return res.json({
         loginSuccess: false,
         message: "Invalid email or password"
