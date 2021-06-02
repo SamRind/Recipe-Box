@@ -238,6 +238,7 @@ app.set('view engine', 'pug');
                 res.end(); 
 });
 
+
   app.get('/Browse', (req, res) => {
     res.render('browse', {});
     //res.sendFile(path.join(__dirname + '/public/browse.html'));
