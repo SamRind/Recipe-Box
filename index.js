@@ -9,6 +9,9 @@ const session = require('express-session')
 const passport = require('passport'); 
 const LocalStrategy = require('passport-local')
 const http = require('http');
+
+
+
 //const router = require('express'); 
 
 // app.use(passport.initialize());
@@ -104,9 +107,8 @@ mongoose.connection.once("open", () => {
 // }
 // //app.use('/login', auth);
 // app.use('/login', require('./routes/users')); 
-// //Passoword authentications 
-
-app.use(session({
+// //Passoword authentications
+  app.use(session({
   secret:"our_little secret",
   resave: false,
   saveUninitialized: false
@@ -114,7 +116,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.use('/api/users', require('./routes/user'));
 
@@ -225,7 +226,19 @@ app.set('view engine', 'pug');
                 res.end(); 
 });
 
-  
+  const user = require("./model/model.js")
+  app.post('/submituser', (req, res) => {
+ const Add = new user({
+                    _id: new mongoose.Types.ObjectId(),
+                    username: req.body.name,
+                    email: req.body.email, 
+                    password: req.body.password,
+                    role: req.body.role,
+                })
+                Add.save();
+                res.end(); 
+});
+
   app.get('/Browse', (req, res) => {
     res.render('browse', {});
     //res.sendFile(path.join(__dirname + '/public/browse.html'));

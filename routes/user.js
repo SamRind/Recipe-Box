@@ -1,15 +1,15 @@
-const { User } = require('../model/model');
+const user = require('../model/model');
 const router = require('express').Router();
 const passport = require('passport');
 
-passport.use(User.createStrategy());
+passport.use(user.createStrategy());
 
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
 
 passport.deserializeUser( async function(id, done) {
-    await User.findById(id, function(err, user) {
+    await user.findById(id, function(err, user) {
         done(err, user);
     });
 });
@@ -26,7 +26,7 @@ router.get('/auth', (req, res) => {
     }
 });
 router.post('/register', async (req, res) => {
-    await User.register( {email: req.body.email}, req.body.password, (err,user)=>{
+    await user.register( {email: req.body.email}, req.body.password, (err,user)=>{
         if(err) return res.json({ success: false, message: err });    // How to send error  ?
         else res.status(200).json({
             success: true
