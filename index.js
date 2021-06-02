@@ -10,8 +10,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local')
 const http = require('http');
 
-
-
 //const router = require('express'); 
 
 // app.use(passport.initialize());
@@ -41,8 +39,9 @@ const http = require('http');
 require("dotenv").config()
 const mongoose = require("mongoose")
 mongoose.connect("mongodb+srv://orind:database21!@cluster0.mc5cu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{
-  useUnifiedTopology: true, 
+  useUnifiedTopology: true,
   useNewUrlParser: true,
+  useCreateIndex: true 
 });
 
 //require("./test/sample")
@@ -317,10 +316,6 @@ app.get("/MyBox", (req, res) => {
 
   app.get("/SignUp", (req, res) => {
       res.render('signup', {})
-  });
-
-  app.get("/LogIn", (req, res) => {
-    res.render('login', {})
   });
 
   app.get('*', (req, res) => {
