@@ -11,6 +11,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local')
 const http = require('http');
 
+
 //const router = require('express'); 
 
 // app.use(passport.initialize());
@@ -149,7 +150,7 @@ app.set('view engine', 'pug');
   //   })
   // })
   //Reg)istration for user 
-  
+  const recipe = require("./model/recipe.js")
   
   app.get('/About', (req, res) => {
     res.render('about', {})
@@ -190,21 +191,30 @@ app.set('view engine', 'pug');
       //ingred.push(ingredientLines);
       var tofill = {name: element.recipe.label, image: element.recipe.image, rUrl: element.recipe.url, yeild: element.recipe.yield, ingredients: element.recipe.ingredientLines};
       recipelist.push(tofill);
-
-    
-      
-      
-
       //recipelist.push(element.recipe.label)
     })
+
     res.render('search', {recipe: recipelist});
     }).catch(function (error) {
 	      console.error(error);
         res.render('search', {recipe:[]});
         //res.end();
       });
+      
+    
     //res.end();
   });
+
+  //app.post('/toadd', (req, res) => {
+   // const Add = new recipe({
+    //    _id: new mongoose.Types.ObjectId(),
+    //    name: req.body.name,
+    //    Ingredients: req.body.ingredients, 
+          //          })
+     //   Add.save();
+     //   res.end(); 
+    //});
+    
   
   // app.use('/AddNew', express.static(path.join(__dirname, '/react/build')));
   // app.get('/AddNew/*', (req, res) => {
@@ -215,7 +225,7 @@ app.set('view engine', 'pug');
     res.render('add', {});
   });
 
-  const recipe = require("./model/recipe.js")
+  //const recipe = require("./model/recipe.js")
 
   app.post('/submit', (req, res) => {
   // res.write(`<p>Name: ${req.body.name}</p>`);
