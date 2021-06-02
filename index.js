@@ -205,15 +205,15 @@ app.set('view engine', 'pug');
     //res.end();
   });
 
-  //app.post('/toadd', (req, res) => {
-   // const Add = new recipe({
-    //    _id: new mongoose.Types.ObjectId(),
-    //    name: req.body.name,
-    //    Ingredients: req.body.ingredients, 
-          //          })
-     //   Add.save();
-     //   res.end(); 
-    //});
+  app.post('/toadd', (req, res) => {
+    const Add = new recipe({
+        _id: new mongoose.Types.ObjectId(),
+        name: req.body.name,
+        Ingredients: req.body.ingredients,
+               })
+      Add.save();
+      res.end(); 
+    });
     
   
   // app.use('/AddNew', express.static(path.join(__dirname, '/react/build')));

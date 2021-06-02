@@ -9,6 +9,7 @@ body
             input#search.form-control(type='text' placeholder='Search...' name='search' required='')
         .form-group.mt-3.mb-0
             button.btn.btn-primary(type='submit' value='Submit') Go!
+    form.border.rounded.w-50.mx-auto.mt-5.p-3(action='/toadd' method='POST')
         table(style='width:100%')
 
             tbody 
@@ -29,12 +30,6 @@ body
                                 .form-group.mt-3.mb-0
                                     button.btn.btn-primary(type='submit' value='Submit' action='/toadd' method='POST') Add Recipe to Box
 
-    
-        
-        
-        
-        
-        
         //-ul#recipe 
             each item in recipe
                 img(src=item.image)
