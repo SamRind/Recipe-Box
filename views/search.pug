@@ -15,7 +15,7 @@ body
             tbody 
                 ul#recipe
                     each item in recipe 
-                        tr 
+                        tr #{item.id}
                             td 
                                 img(src=item.image, style='max-height: 100px; max-width: 100px;')
                             td #{item.name}
@@ -23,12 +23,14 @@ body
                             td 
                                 a(href=item.rUrl) Click to See Instructions
                             td
-                                ul#ingredients Ingredients:
-                                    each thing in item.ingredients
-                                        li= thing
+                                .form-add
+                                    label(for='ingredients')
+                                        ul#ingredients Ingredients:
+                                            each thing in item.ingredients
+                                                li= thing
                             td 
                                 .form-group.mt-3.mb-0
-                                    button.btn.btn-primary(type='submit' value='Submit' action='/toadd' method='POST') Add Recipe to Box
+                                    button.btn.btn-primary(type='submit' value='Submit' action='/toadd?id='+item.id method='POST') Add Recipe to Box
 
         //-ul#recipe 
             each item in recipe

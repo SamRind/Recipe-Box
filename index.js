@@ -10,6 +10,7 @@ const session = require('express-session')
 const passport = require('passport'); 
 const LocalStrategy = require('passport-local')
 const http = require('http');
+const url = 'mongodb+srv://orind:database21!@cluster0.mc5cu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 
 //const router = require('express'); 
@@ -186,11 +187,13 @@ app.set('view engine', 'pug');
     //so here create object to put stuff into
     //forEach
     //res.end();
+    var i = 0
     response.data.hits.forEach(element =>{
       //so here create object to put stuff into build object and push into list
       //ingred.push(ingredientLines);
-      var tofill = {name: element.recipe.label, image: element.recipe.image, rUrl: element.recipe.url, yeild: element.recipe.yield, ingredients: element.recipe.ingredientLines};
+      var tofill = {name: element.recipe.label, image: element.recipe.image, rUrl: element.recipe.url, yeild: element.recipe.yield, ingredients: element.recipe.ingredientLines, id: i};
       recipelist.push(tofill);
+      i+=1;
       //recipelist.push(element.recipe.label)
     })
 
@@ -206,11 +209,15 @@ app.set('view engine', 'pug');
   });
 
   app.post('/toadd', (req, res) => {
+    console.log(req.body.name);
+    console.log(req.body.ingredients);
     const Add = new recipe({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         Ingredients: req.body.ingredients,
-               })
+        Prep: req.body.Prep,
+        Bookmark: req.body.Bookmark,
+      })
       Add.save();
       res.end(); 
     });
@@ -331,8 +338,17 @@ app.set('view engine', 'pug');
 });
 
   app.get("/MyBox", (req, res) => {
-    res.render('mybox', {})
-  
+    var resultArray = [];
+    mongoose.connect(url, function(err, db){
+    var cursor = db.collection('recipes').find();
+    console.log(cursor);
+    cursor.forEach(function(doc,err){
+      console.log(doc);
+      resultArray.push(doc);
+    })
+    console.log(resultArray);
+    res.render('mybox', {recipe: resultArray})
+    })
   });
 
   app.get("/LogIn", (req, res) => {
