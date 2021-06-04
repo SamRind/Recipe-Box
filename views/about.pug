@@ -2,11 +2,44 @@ include includes/head.pug
 body
   include includes/nav.pug
   main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
-    form.border.rounded.w-50.mx-auto.mt-5.p-3
-      .from-group
-        h1.mb-3.text-center About Page
-        h3.mb-3.text-center Leah will format this and explain
-        h2.mb-3.text-center Leah Moser: Add your bio
-        h2.mb-3.text-center Sam Rind: Add your bio
-        h2.mb-3.text-center Shay Green: Add your bio
-  include includes/foot.pug 
+    h1.mt-3-text-center About Us
+    h4.mt-3-text-center Its free to join just click the register button!
+    table(style='width:100%')
+      tbody
+        tr
+            td
+              h2.mt-3 Save recipes from any website!
+              h5.mt-3 Just copy and paste the url into the Browse box
+            td 
+             img(src='../images/browse-photo.png' style='max-height: 500px; max-width: 500px;')
+
+
+
+      table(style='width:100%')
+        tr
+          td 
+            img(src='../images/search-photo.png' style='max-height: 500px; max-width: 500px;')
+          td 
+            h2.mt-3 Search for new recipes using on cite!
+            h5.mt-3 Add your search topic into the search bar and press "Go!"
+
+
+      table(style='width:100%')
+        tr
+          td 
+            h2.mt-3 Add your own recipe! 
+            h5.mt-3 Just fill out the fields and hit save.
+          td 
+            img(src='../images/add-photo.png' style='max-height: 500px; max-width: 500px;')
+    h2.mt-3-text-center Web Developer Bio's 
+    h4.mt-3-text-center Leah Moser is a career changer who used to be a chef.
+    h4.mt-3-text-center However, about 3 years ago enrolled in Portland State University to pursue a career in Computer Science 
+    h4.mt-3-text-center This web application is a wonderful mix of her old career and new one.
+    h4.mt-3-text-center Leah had always wondered how I could combine my chef past with my Computer Science future
+    h4.mt-3-text-center Then her teamate came up with this idea and she loved it!
+    h4.mt-3-text-center This allowed her to do have a moment where her old and new carreer could meet.
+    h4.mt-3-text-center "Having this web application as part of my very first web build is so amazing for 
+    h4.mt-3-text-center this reason. I could never have dreamed that the two fields would ever have a common ground."
+    h4.mt-3-text-center Shay Green ---- add your bio 
+    h4.mt-3-text-center Sam Rind ---- add your bio  
+  include includes/foot.pug

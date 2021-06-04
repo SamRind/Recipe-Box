@@ -15,13 +15,7 @@ body
                                 //-img(src=item.image, style='max-height: 100px; max-width: 100px;')
                             td #{item.name}
                             //-td Yeild: #{item.yeild}
-                            //-td 
-                                a(href=item.rUrl) Click to See Instructions
-                            td
-                                .form-add
-                                    label(for='ingredients')
-                                        ul#ingredients Ingredients:
-                                            each thing in item.ingredients
-                                                li= thing
+                            
+                              
           
     include includes/foot.pug 
