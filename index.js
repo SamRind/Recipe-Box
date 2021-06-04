@@ -1,6 +1,5 @@
 //Express routing here to the three pages
 const express = require('express');
-const cors = require('cors')
 const app = express();
 const port = process.env.PORT || 5000;
 const path = require('path');
@@ -10,6 +9,9 @@ const session = require('express-session')
 const passport = require('passport'); 
 const LocalStrategy = require('passport-local')
 const http = require('http');
+const bcrypt = require('bcrypt');
+const flash = require('express-flash'); 
+const methodOverride = require('method-override')
 
 //Starting database portion here 
 require("dotenv").config()
@@ -28,17 +30,34 @@ mongoose.connection.once("open", () => {
   console.log("MongoDB connected successfully")
 })
 
-// //Passoword authentications
-  app.use(session({
-  secret:"our_little secret",
-  resave: false,
-  saveUninitialized: false
-}));
+// // //Passoword authentications
+//   app.use(session({
+//   secret:"our_little secret",
+//   resave: false,
+//   saveUninitialized: false
+// }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+// // app.use(passport.initialize());
+// // app.use(passport.session());
 
-app.use('/api/users', require('./routes/user'));
+//app.use('/api/users', require('./routes/user'));
+
+
+// app.get("/LogIn", (req, res) => {
+//     res.render('login', {})
+// });
+
+// app.post("/LogIn", (req, res) => {
+//     res.render('mybox',{})
+// });
+
+// app.get("/SignUp", (req, res) => {
+//       res.render('signup', {})
+//   });
+
+//   app.post("/SignUp", (req, res) => {
+//       res.render('mybox', {})
+//   });
 
 app.use(
   parser.urlencoded({
@@ -52,8 +71,100 @@ app.set('view engine', 'pug');
 
 
 app.get('/', (req, res) => {
-    res.render('home', {});
+  if(req.user)
+  {
+    res.render('home', {name: req.user.name});
+  }
+  else {
+    res.render('home', {});  
+  }
 });
+
+const initializePassport = require('./passport-config')
+initializePassport(
+  passport,
+  email => users.find(user => user.email === email),
+  id => users.find(user => user.id === id)
+)
+
+const users = []
+
+// app.set('view-engine', 'ejs')
+// app.use(express.urlencoded({ extended: false }))
+app.use(flash())
+app.use(session({
+  secret: "our_ little secret",
+  resave: false,
+  saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
+
+// app.get('/', checkAuthenticated, (req, res) => {
+//   res.render('index.ejs', { name: req.user.name })
+// }); 
+
+app.get('/login', checkNotAuthenticated, (req, res) => {
+
+  res.render('login', {}); 
+})
+
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+  successRedirect: '/home',
+  failureRedirect: '/login',
+  failureFlash: true
+}))
+
+app.get('/register', checkNotAuthenticated, (req, res) => {
+  res.render('register', {}); 
+})
+
+app.post('/register', checkNotAuthenticated, async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    users.push({
+      id: Date.now().toString(),
+      name: req.body.name,
+      email: req.body.email,
+      password: hashedPassword
+    })
+    res.redirect('/login')
+  } catch {
+    res.redirect('/register')
+  }
+})
+
+app.delete('/logout', (req, res) => {
+  req.logOut()
+  res.redirect('/login')
+})
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
+  }
+
+  res.redirect('/login')
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/home')
+  }
+  next()
+}
+
+app.get('/home', (req, res) => {
+  if(req.user)
+  {
+    res.render('home', {name: req.user.name});
+  }
+  else{
+    res.render('home', {});  
+  }
+});
+
 
 app.get('/About', (req, res) => {
     res.render('about', {})
@@ -116,47 +227,27 @@ const Add = new recipe({
                 res.end(); 
 });
 
-const user = require("./model/model.js");
-app.post('/submituser', (req, res) => {
+// const user = require("./model/model.js");
+// app.post('/submituser', (req, res) => {
 
-  if (finduser(req.params.username) === true)
-  {
-    console.log("user does exist so just login") 
-    res.end(); 
-  } 
-const Add = new user({
-                    _id: new mongoose.Types.ObjectId(),
-                    username: req.body.name,
-                    email: req.body.email, 
-                    password: req.body.password,
-                    role: req.body.role,
-                })
-                console.log("this is else block test")
-                Add.save();
-                res.end(); 
-});
+//   if (finduser(req.params.username) === true)
+//   {
+//     console.log("user does exist so just login") 
+//     res.end(); 
+//   } 
+// const Add = new user({
+//                     _id: new mongoose.Types.ObjectId(),
+//                     username: req.body.name,
+//                     email: req.body.email, 
+//                     password: req.body.password,
+//                     role: req.body.role,
+//                 })
+//                 console.log("this is else block test")
+//                 Add.save();
+//                 res.end(); 
+// });
 
-  async finduser = (username, next) => { 
-  user.findOne({username: username}, function(err, user){
-        if(err) {
-          console.log(err);
-        }
-        var message;
-        console.log("User", user); 
-        if(user) {
-            console.log(user)
-            message = "user exists";
-            console.log(message)
-            return true; 
-        } else {
-            message= "user doesn't exist";
-            console.log(message)
-            return false; 
-        }
-        return message; 
-       // res.json({message: message});
-    });
-  }
+
 
 app.get('/Browse', (req, res) => {
   res.render('browse', {});
@@ -181,6 +272,7 @@ app.get('/Browse', (req, res) => {
       let im = "/public/images/default-image.jpg";
       if (response.data[0].images.length >= 1){
         im = response.data[0].images[0];
+      }
     
       res.render('recipe', {
         recipe: response.data[0].name,
@@ -192,7 +284,7 @@ app.get('/Browse', (req, res) => {
         //instructions: instructions,
         instructions: response.data[0].instructions[0].steps,
       });
-
+    
     }).catch(function (error) {
 	    console.error(error);
       res.render('error', {message: "We couldn't parse the specified URL, please try another url."});
@@ -203,21 +295,21 @@ app.get("/MyBox", (req, res) => {
     res.render('mybox', {})
 });
 
-app.get("/LogIn", (req, res) => {
-    res.render('login', {})
-});
+// app.get("/LogIn", (req, res) => {
+//     res.render('login', {})
+// });
 
-app.post("/LogIn", (req, res) => {
-    res.render('mybox',{})
-});
+// app.post("/LogIn", (req, res) => {
+//     res.render('mybox',{})
+// });
 
-app.get("/SignUp", (req, res) => {
-      res.render('signup', {})
-  });
+// app.get("/SignUp", (req, res) => {
+//       res.render('signup', {})
+//   });
 
-  app.post("/SignUp", (req, res) => {
-      res.render('mybox', {})
-  });
+//   app.post("/SignUp", (req, res) => {
+//       res.render('mybox', {})
+//   });
 
 
 
@@ -230,8 +322,8 @@ app.get("/SignUp", (req, res) => {
 
   
 
- 
- 
+
+
 //const router = require('express'); 
 
 // app.use(passport.initialize());

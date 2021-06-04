@@ -6,7 +6,7 @@ nav.navbar.navbar-default
         img(src='../images/logo-small.png')
     ul.nav.justify-content-center
       li.nav-item
-        a.nav-color(href='/') Home
+        a.nav-color(href='/home') Home
       li.nav-item
         a.nav-color(href='About') About Us
       li.nav-item
@@ -18,7 +18,14 @@ nav.navbar.navbar-default
       li.nav-item
         a.nav-color(href='MyBox') My Box
     ul.nav.navbar-nav.navbar-right
-      li.nav-item
-        a(href='SignUp') Sign Up
-      li.nav-item
-        a(href='LogIn') Log In
+      if name
+        li.nav-item 
+          a(href='/home') Hello #{name}
+        li.nav-item 
+          form(action='/logout?_method=DELETE' method='POST')
+            button(type='submit') Log Out
+      else 
+        li.nav-item
+          a(href='register') Register
+        li.nav-item
+          a(href='login') Login
