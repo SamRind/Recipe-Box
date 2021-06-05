@@ -6,7 +6,7 @@ body {
   margin: 0;
   float: none;
   text-align: center;
-  font-family: "Lucida Handwriting";
+  font-family: cursive;
   font-size: xxx-large;
 }
 .navbar-brand > img {
@@ -64,4 +64,19 @@ form {
 .recipe-img {
   width: 100%;
   object-fit: contain;
+}
+.form-about {
+  justify-content: center;
+  margin: 30px;
+  text-align: center;
+  padding: 10px;
+  height: 100%;
+  font-family: cursive;
+}
+.form-bio {
+  justify-content: left;
+  margin: 10px;
+  text-align: left;
+  padding: 10px;
+  height: 100%;
 }
