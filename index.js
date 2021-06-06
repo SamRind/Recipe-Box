@@ -1,3 +1,10 @@
+//This is the main javascript page for the web application
+//This is built using express and axios.
+//Program Name: Recipe Box
+//Program Authors: Leah Moser, Sam Rind, Shay Green
+//For Full-Stack 465/565
+//Spring 2021
+
 //Express routing here to the three pages
 const express = require('express');
 const app = express();

@@ -1,3 +1,8 @@
+//This is the javascript file for the database schema
+//Author of file: Sam Rind
+//Full-Stack 465/565
+//Sring 2021
+
 const mongoose = require('mongoose');
 const moment = require("moment");
 const passportLocalMongoose = require('passport-local-mongoose');
