@@ -316,7 +316,7 @@ app.set('view engine', 'pug');
 	    console.error(error);
       // res.write("<h1>Sorry, we cannot load this recipe</h1>")
       // res.end();
-      res.render('error', {message: "We couldn't parse the specified URL, please try another url."});
+      res.render('404', {message: "We couldn't parse the specified URL, please try another url."});
     });
 });
 
@@ -343,7 +343,7 @@ app.set('view engine', 'pug');
     // res.writeHead(404, { 'Content-Type': 'text/html' });
     // res.write("<h1>404: Page not found</h1>");
     // res.end();
-    res.render('error', {message: "404: Page not found"});
+    res.render('404', {message: "404: Page not found"});
 
   });
   

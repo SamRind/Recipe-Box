@@ -55,13 +55,38 @@ form {
   width: 400px;
 }
 .contrast-bg {
-  background-color: #779486;
+  background-color: #2c7873;
+  color: #ffd56b;
   padding: 20px;
   justify-content: center;
   width: 75%;
+  margin: auto;
 }
 
 .recipe-img {
   width: 100%;
   object-fit: contain;
+}
+
+.home-col {
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 3px;
+  text-align: center;
+  width: 25%;
+  display: inline-block;
+  margin: 5px;
+  padding: 5px;
+  min-height: 400px;
+}
+
+.home-row {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.home-img {
+  margin: auto;
 }

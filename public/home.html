@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="../index.js"></script>
+    <title>Recipe Box</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div id=logo class="row">
+          <a class="navbar-brand" href="/">
+            Recipe Box
+            <img src="images/logo-small.png" />
+          </a>
+        </div>
+        <ul class="nav justify-content-center">
+          <li class="nav-item"><a class="nav-color" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-color" href="Search">Search</a></li>
+          <li class="nav-item"><a class="nav-color" href="Browse">Browse</a></li>
+          <li class="nav-item"><a class="nav-color" href="AddNew">Add New</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right"">
+          <li class="nav-item"><a href="SignUp">Sign Up</a></li>
+          <li class="nav-item"><a href="LogIn">Log In</a></li>
+        </ul>
+      </div>
+    </nav>      
+    
+    <div class="row home-row">
+        <h1>Welcome to My Recipe Box!</h1>
+        <p>Your Recipe Box will serve as one centralized location for all of your recipes.</p>
+        <p>Add a recipe that you found online, add an original family recipe, or search our database for recipe inspiration.</p>
+        <p>Your personalized Box is just a few clicks away:</p>
+        <a href="/SignUp">Create your recipe box account here!</a>
+    </div>
+    <div class="row home-row">
+        <div class="col home-col">
+            <figure>
+                <img src="images/search.png" alt="A magnifying glass and vegetables">
+            </figure>
+            <h3>Search our online database of recipes</h3>
+            <a href="/Search">Go &raquo;</a>
+        </div>
+        <div class="col home-col">
+            <figure>
+                <img src="images/browse-1.png" alt="A magnifying glass and vegetables">
+            </figure>
+            <h3>Browse a url to save a recipe to your box</h3>
+            <a href="/Browse">Go &raquo;</a>
+        </div>
+        <div class="col home-col">
+            <figure>
+                <img src="images/add-1.png" alt="Pages of an old recipe book and a whisk">
+            </figure>
+            <h3>Add an original recipe to your box</h3>
+            <a href="/AddNew">Go &raquo;</a>
+        </div>
+    </div>
+
+    <footer class="page-footer font-small blue pt-4">
+        <div class="footer-copyright text-center py-3">Spring 2021 CS 465/565:
+            <a href="https://github.com/SamRind/Recipe-Box"> Recipe Box</a>
+        </div>
+    </footer>
+  </body>
+
+</html>
