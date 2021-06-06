@@ -133,7 +133,6 @@ app.use(methodOverride('_method'))
 // }); 
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
-
   res.render('login', {}); 
 })
 
@@ -171,7 +170,6 @@ function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next()
   }
-
   res.redirect('/login')
 }
 
@@ -200,7 +198,6 @@ app.get('/About', (req, res) => {
 app.get('/search', (req, res) => {
     res.render('search', {recipe:[]});
     //res.sendFile(path.join(__dirname + '/public/search.html'));
-
 });
   
 app.post('/search', (req, res) => {
