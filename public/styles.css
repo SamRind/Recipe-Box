@@ -38,16 +38,6 @@ nav ul {
   color: #a72c0e;
 }
 
-form {
-  background-color: #2c7873;
-  color: #ffd56b;
-  width: 75%;
-  justify-content: center;
-  margin: auto;
-  text-align: center;
-  padding: 10px;
-  height: 100%;
-}
 a {
   color: darkblue;
 }
@@ -64,6 +54,7 @@ a {
   justify-content: center;
   width: 75%;
   margin: auto;
+  text-align: center;
 }
 
 .recipe-img {
@@ -76,11 +67,10 @@ a {
   border: 2px solid black;
   border-radius: 3px;
   text-align: center;
-  width: 25%;
+  width: 30%;
   display: inline-block;
-  margin: 5px;
-  padding: 5px;
-  min-height: 400px;
+  margin: 0.5vw;
+  padding: 2vw;
 }
 
 .home-row {
@@ -93,6 +83,7 @@ a {
 .home-img {
   margin: auto;
 }
+
 .form-about {
   justify-content: center;
   margin: 50px;
@@ -101,6 +92,7 @@ a {
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 .form-bio {
   justify-content: left;
   margin: 10px;

@@ -4,7 +4,7 @@ body
   main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
     if messages.error
       p #{messages.error}
-    form.border.rounded.w-50.mx-auto.mt-5.p-3(action="/login" method="POST")
+    form.contrast-bg.border.rounded.w-50.mx-auto.mt-5.p-3(action="/login" method="POST")
       .from-group
         h1.mb-3.text-center Login to your Recipe Box
         label(for='login')

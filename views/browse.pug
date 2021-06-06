@@ -2,11 +2,11 @@ include includes/head.pug
 body
   include includes/nav.pug
   main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
-    form.form-inline.bg-light.border.rounded.w-50.mx-auto.mt-5.p-3(action='/Browse' method='POST')
+    form.contrast-bg.form-inline.bg-light.border.rounded.w-50.mx-auto.mt-5.p-3(action='/Browse' method='POST')
         h1 Browse Recipes
         .form-group.browse-form-group
             label(for='Url')
-            input#Url.form-control.form-text.url-input(type='text' name='Url' required='required')
+            input#Url.form-control.form-text.url-input(type='text' name='Url' placeholder='Enter a online recipe URL here' required='required')
         .form-group.browse-form-group
         button#Submit.btn.btn-primary(type='submit') Find Recipe
     include includes/foot.pug

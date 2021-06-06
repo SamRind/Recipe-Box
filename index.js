@@ -221,9 +221,9 @@ app.post('/search', (req, res) => {
     };
 
     axios.request(searchurl).then(function (response) {
-	  console.log(response.data);
-    console.log(response.data.hits[0]);
-    console.log(response.data.hits[0].recipe.label)
+	  //console.log(response.data);
+    //console.log(response.data.hits[0]);
+    //console.log(response.data.hits[0].recipe.label)
     let recipelist = [];
     //let ingred = [];
     //so here create object to put stuff into
@@ -309,8 +309,15 @@ const Add = new recipe({
 
 
 
-app.get('/Browse', (req, res) => {
-  res.render('browse', {});
+  app.get('/Browse', (req, res) => {
+    if(req.user)
+    {
+      res.render('browse', {name: req.user.name});
+    }
+    else{
+      res.render('browse', {});  
+    }
+    //res.render('browse', {name: req.user.name});
   });
   app.post('/Browse', (req, res)=> {
     const url = "mycookbook-io1.p.rapidapi.com"
