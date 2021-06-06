@@ -1,5 +1,32 @@
 include includes/head.pug
 body
   include includes/nav.pug
+<<<<<<< HEAD
   main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
+=======
+  main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4.contrast-bg
+    .row.home-row
+      h1 Welcome to My Recipe Box!
+      p Your Recipe Box will serve as one centralized location for all of your recipes.
+      p Add a recipe that you found online, add an original family recipe, or search our database for recipe inspiration.
+      p Your personalized Box is just a few clicks away:
+      a(href='/SignUp') Create your recipe box account here!
+    .row.home-row.justify-content-center
+      .col-sm-3.home-col
+        figure
+          img.img-responsive.home-img(src='images/search.png' alt='A magnifying glass and vegetables')
+        h3 Search our online database of recipes
+        a(href='/Search') Go &raquo;
+      .col-sm-3.home-col
+        figure
+          img.img-responsive.home-img(src='images/browse.png' alt='A magnifying glass and vegetables')
+        h3 Browse a url to save a recipe to your box
+        a(href='/Browse') Go &raquo;
+      .col-sm-3.home-col
+        figure
+          img.img-responsive.home-img(src='images/add-1.png' alt='Pages of an old recipe book and a whisk')
+        h3 Add an original recipe to your box
+        a(href='/AddNew') Go &raquo;
+
+>>>>>>> new_browse
     include includes/foot.pug 
