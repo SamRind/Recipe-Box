@@ -343,13 +343,13 @@ app.get('/Browse', (req, res) => {
     
     }).catch(function (error) {
 	    console.error(error);
-<<<<<<< HEAD
-      res.render('error', {message: "We couldn't parse the specified URL, please try another url."});
-=======
+
+
+
       // res.write("<h1>Sorry, we cannot load this recipe</h1>")
       // res.end();
       res.render('404', {message: "We couldn't parse the specified URL, please try another url."});
->>>>>>> new_browse
+
     });
 });
 
@@ -386,15 +386,15 @@ app.get('/Browse', (req, res) => {
 
 
   app.get('*', (req, res) => {
-<<<<<<< HEAD
-    res.render('error', {message: "404: Page not found"});
-=======
+
+
+
     // res.writeHead(404, { 'Content-Type': 'text/html' });
     // res.write("<h1>404: Page not found</h1>");
     // res.end();
     res.render('404', {message: "404: Page not found"});
 
->>>>>>> new_browse
+
   });
   
   const server = http.createServer(app);
