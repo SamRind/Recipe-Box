@@ -199,12 +199,23 @@ app.get('/home', (req, res) => {
 
 
 app.get('/About', (req, res) => {
-    res.render('about', {})
+  if(req.user)
+  {
+    res.render('about', {name: req.user.name});
+  }
+  else{
+    res.render('about', {});  
+  }
 });
 
 app.get('/search', (req, res) => {
-    res.render('search', {recipe:[]});
-    //res.sendFile(path.join(__dirname + '/public/search.html'));
+  if(req.user)
+  {
+    res.render('search', {name: req.user.name, recipe:[]});
+  }
+  else{
+    res.render('search', {recipe:[]})  
+  }
 });
   
 app.post('/search', (req, res) => {
@@ -270,7 +281,14 @@ app.post('/search', (req, res) => {
   // });
 
 app.get('/AddNew', (req, res) => {
-    res.render('add', {});
+    if(req.user)
+  {
+    res.render('add', {name: req.user.name});
+  }
+  else{
+    res.render('add', {})  
+  }
+    
 });
 
 const recipe = require("./model/recipe.js")
@@ -398,12 +416,17 @@ const Add = new recipe({
 
   app.get('*', (req, res) => {
 
-
-
     // res.writeHead(404, { 'Content-Type': 'text/html' });
     // res.write("<h1>404: Page not found</h1>");
     // res.end();
-    res.render('404', {message: "404: Page not found"});
+    //res.render('404', {message: "404: Page not found"});
+    if(req.user)
+    {
+      res.render('404', {message: "404: Page not found", name: req.user.name});
+    }
+    else{
+      res.render('404', {message: "404: Page not found"})  
+    }
 
 
   });
