@@ -372,9 +372,6 @@ const Add = new recipe({
     
     }).catch(function (error) {
 	    console.error(error);
-
-
-
       // res.write("<h1>Sorry, we cannot load this recipe</h1>")
       // res.end();
       res.render('404', {message: "We couldn't parse the specified URL, please try another url."});
@@ -386,12 +383,14 @@ const Add = new recipe({
     var resultArray = [];
     mongoose.connect(url, function(err, db){
     var cursor = db.collection('recipes').find();
-    console.log(cursor);
+    //console.log(cursor);
     cursor.forEach(function(doc,err){
-      console.log(doc);
+      console.log("doc here", doc);
+      //resultArray.push(doc);
+      console.log("Results", resultArray);
       resultArray.push(doc);
     })
-    console.log(resultArray);
+    //console.log("Results", resultArray);
     res.render('mybox', {recipe: resultArray})
     })
   });
@@ -436,7 +435,7 @@ const Add = new recipe({
 
   
 
-
+//commented out code that we might still need to reference 
 
 //const router = require('express'); 
 
