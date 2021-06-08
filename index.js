@@ -379,7 +379,27 @@ const Add = new recipe({
       res.render('404', {message: "We couldn't parse the specified URL, please try another url."});
 
     });
-});
+  });
+
+  app.post("/recipe", (req, res) => {
+    //console.log(req);
+    //let name = document.getElementById("recipe");
+    //let ingredients = document.getElementById("ingredients");
+    //let instructions = document.getElementById("instructions");
+    //console.log(name);
+    //console.log(ingredients);
+    //console.log(instructions);
+    const Add = new recipe({
+      _id: new mongoose.Types.ObjectId(),
+      name: req.body.name,
+      Ingredients: req.body.Ingredients, 
+      Prep: req.body.Prep,
+      Bookmark: req.body.Bookmark,
+  })
+  Add.save();
+  res.redirect('/mybox');
+
+  });
 
   app.get("/MyBox", (req, res) => {
     //let resultfunc = async()=> {
