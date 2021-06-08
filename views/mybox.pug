@@ -5,7 +5,6 @@ body
     form.contrast-bg.border.rounded.w-50.mx-auto.mt-5.p-3
         .from-group
             h1.mt-2.mb-4 Contents of Your Recipe Box
-            label(for='mybox')
             table(style='width:100%')
               tbody 
                 ul#recipe
@@ -16,6 +15,7 @@ body
                             td Name: #{item.name}
                             td Ingredients: #{item.ingredients}
                             td Prep: #{item.prep}
+    
                             
                               
           

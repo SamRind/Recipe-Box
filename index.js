@@ -390,8 +390,11 @@ const Add = new recipe({
       console.log("Results", resultArray);
       resultArray.push(doc);
     })
-    //console.log("Results", resultArray);
-    res.render('mybox', {recipe: resultArray})
+    //console.log("Results", resultArray);A
+    setTimeout(function(){
+      console.log("I waiting 3 seconds");
+  },3000);
+    res.render('mybox', {recipe: resultArray,})
     })
   });
 
@@ -435,7 +438,7 @@ const Add = new recipe({
 
   
 
-//commented out code that we might still need to reference 
+//****commented out code that we might still need to reference 
 
 //const router = require('express'); 
 

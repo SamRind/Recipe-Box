@@ -11,11 +11,10 @@ body
             button.btn.btn-primary(type='submit' value='Submit') Go!
     form.contrast-bg.border.rounded.w-50.mx-auto.mt-5.p-3(action='/toadd' method='POST')
         table(style='width:100%')
-
             tbody 
                 ul#recipe
                     each item in recipe 
-                        tr #{item.id}
+                        tr 
                             td 
                                 img(src=item.image, style='max-height: 100px; max-width: 100px;')
                             td #{item.name}
