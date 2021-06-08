@@ -1,9 +1,9 @@
-nav.navbar.navbar-default
+nav.navbar.my-navbar
   .container-fluid
     #logo.row
       a.navbar-brand(href='/')
         | Recipe Box
-        img(src='../images/logo-small.png')
+        img(src='../images/logo-small.png', alt='image of a recipe box')
     ul.nav.justify-content-center
       li.nav-item
         a.nav-color(href='/home') Home
@@ -26,6 +26,6 @@ nav.navbar.navbar-default
             button(type='submit') Log Out
       else 
         li.nav-item
-          a(href='register') Register
+          a.nav-color(href='register') Register
         li.nav-item
-          a(href='login') Login
+          a.nav-color(href='login') Login

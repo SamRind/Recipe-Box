@@ -199,12 +199,23 @@ app.get('/home', (req, res) => {
 
 
 app.get('/About', (req, res) => {
-    res.render('about', {})
+  if(req.user)
+  {
+    res.render('about', {name: req.user.name});
+  }
+  else{
+    res.render('about', {});  
+  }
 });
 
 app.get('/search', (req, res) => {
-    res.render('search', {recipe:[]});
-    //res.sendFile(path.join(__dirname + '/public/search.html'));
+  if(req.user)
+  {
+    res.render('search', {name: req.user.name, recipe:[]});
+  }
+  else{
+    res.render('search', {recipe:[]})  
+  }
 });
   
 app.post('/search', (req, res) => {
@@ -260,7 +271,8 @@ app.post('/search', (req, res) => {
         Bookmark: req.body.Bookmark,
       })
       Add.save();
-      res.end(); 
+      res.redirect('/mybox');
+      //res.end(); 
     });
     
   
@@ -270,7 +282,14 @@ app.post('/search', (req, res) => {
   // });
 
 app.get('/AddNew', (req, res) => {
-    res.render('add', {});
+    if(req.user)
+  {
+    res.render('add', {name: req.user.name});
+  }
+  else{
+    res.render('add', {})  
+  }
+    
 });
 
 const recipe = require("./model/recipe.js")
@@ -284,7 +303,8 @@ const Add = new recipe({
                     Bookmark: req.body.Bookmark,
                 })
                 Add.save();
-                res.end(); 
+                res.redirect('/mybox');
+                //res.end(); 
 });
 
 // const user = require("./model/model.js");
@@ -354,9 +374,6 @@ const Add = new recipe({
     
     }).catch(function (error) {
 	    console.error(error);
-
-
-
       // res.write("<h1>Sorry, we cannot load this recipe</h1>")
       // res.end();
       res.render('404', {message: "We couldn't parse the specified URL, please try another url."});
@@ -365,17 +382,30 @@ const Add = new recipe({
 });
 
   app.get("/MyBox", (req, res) => {
-    var resultArray = [];
-    mongoose.connect(url, function(err, db){
-    var cursor = db.collection('recipes').find();
-    console.log(cursor);
-    cursor.forEach(function(doc,err){
-      console.log(doc);
-      resultArray.push(doc);
+    //let resultfunc = async()=> {
+      let resultArray = [];
+      mongoose.connect(url, function(err, db){
+      var cursor = db.collection('recipes').find();
+      //console.log(cursor);
+      cursor.forEach(function(doc,err){
+        //console.log("doc here", doc);
+        //resultArray.push(doc);
+        resultArray.push(doc);
+        //console.log("Results", resultArray);
+    });
     })
-    console.log(resultArray);
-    res.render('mybox', {recipe: resultArray})
-    })
+    //return await resultArray;
+  //};
+   // resultfunc().then((value)=>console.log(value))
+    setTimeout(function(){
+      console.log("Im waiting 7 seconds");
+      res.render('mybox', {recipe: resultArray});
+    },2000);
+    //console.log("Results2", resultArray);
+    //console.log("Hello world");
+    //console.log("Results3", resultArray);
+    //res.render('mybox', {recipe: resultArray});
+    
   });
 
 // app.get("/LogIn", (req, res) => {
@@ -398,12 +428,17 @@ const Add = new recipe({
 
   app.get('*', (req, res) => {
 
-
-
     // res.writeHead(404, { 'Content-Type': 'text/html' });
     // res.write("<h1>404: Page not found</h1>");
     // res.end();
-    res.render('404', {message: "404: Page not found"});
+    //res.render('404', {message: "404: Page not found"});
+    if(req.user)
+    {
+      res.render('404', {message: "404: Page not found", name: req.user.name});
+    }
+    else{
+      res.render('404', {message: "404: Page not found"})  
+    }
 
 
   });
@@ -413,7 +448,7 @@ const Add = new recipe({
 
   
 
-
+//****commented out code that we might still need to reference 
 
 //const router = require('express'); 
 

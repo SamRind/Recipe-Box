@@ -2,10 +2,9 @@ include includes/head.pug
 include includes/nav.pug
 body
   main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
-    form.contrast-bg.border.rounded.w-50.mx-auto.mt-5.p-3
+    form.contrast-bg.border.rounded.w-50.mx-auto.mt-5.p-3(name='mybox')
         .from-group
             h1.mt-2.mb-4 Contents of Your Recipe Box
-            label(for='mybox')
             table(style='width:100%')
               tbody 
                 ul#recipe
@@ -13,8 +12,11 @@ body
                         tr 
                             td 
                                 //-img(src=item.image, style='max-height: 100px; max-width: 100px;')
-                            td #{item.name}
-                            //-td Yeild: #{item.yeild}
+                            td Name: #{item.name}
+                            td Ingredients: #{item.Ingredients}
+                            td Prep: #{item.Prep}
+                            
+    
                             
                               
           
