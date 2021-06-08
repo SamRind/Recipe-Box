@@ -14,6 +14,7 @@
    - Express routing
 
 2. Add your own recipe
+   - Allows user to enter their own recipe via a form
 3. Find recipe from url
    - Allows users to input a url from an external online recipe
    - This feature utilizes the mycookbook.io API to scrape the website for recipe details
@@ -48,7 +49,10 @@ Cors
 Axios
 Body-Parser
 
-
 ### If not running deployed site run with:
+
 npx nodemon index.js
-### Deployed Site: 
+
+### Deployed Site:
+
+https://recipebox-fs.herokuapp.com/
