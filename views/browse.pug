@@ -2,7 +2,7 @@ include includes/head.pug
 body
   include includes/nav.pug
   main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
-    form.contrast-bg.form-inline.bg-light.border.rounded.w-50.mx-auto.mt-5.p-3(action='/Browse' method='POST')
+    form.contrast-bg.form-inline.bg-light.border.rounded.w-50.mx-auto.mt-5.p-3(action='/Browse' method='POST' name='browse')
         h1 Browse Recipes
         .form-group.browse-form-group
             label(for='Url')
