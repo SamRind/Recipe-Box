@@ -271,7 +271,8 @@ app.post('/search', (req, res) => {
         Bookmark: req.body.Bookmark,
       })
       Add.save();
-      res.end(); 
+      res.redirect('/mybox');
+      //res.end(); 
     });
     
   
@@ -302,7 +303,8 @@ const Add = new recipe({
                     Bookmark: req.body.Bookmark,
                 })
                 Add.save();
-                res.end(); 
+                res.redirect('/mybox');
+                //res.end(); 
 });
 
 // const user = require("./model/model.js");
@@ -380,22 +382,30 @@ const Add = new recipe({
 });
 
   app.get("/MyBox", (req, res) => {
-    var resultArray = [];
-    mongoose.connect(url, function(err, db){
-    var cursor = db.collection('recipes').find();
-    //console.log(cursor);
-    cursor.forEach(function(doc,err){
-      console.log("doc here", doc);
-      //resultArray.push(doc);
-      console.log("Results", resultArray);
-      resultArray.push(doc);
+    //let resultfunc = async()=> {
+      let resultArray = [];
+      mongoose.connect(url, function(err, db){
+      var cursor = db.collection('recipes').find();
+      //console.log(cursor);
+      cursor.forEach(function(doc,err){
+        //console.log("doc here", doc);
+        //resultArray.push(doc);
+        resultArray.push(doc);
+        //console.log("Results", resultArray);
+    });
     })
-    //console.log("Results", resultArray);A
+    //return await resultArray;
+  //};
+   // resultfunc().then((value)=>console.log(value))
     setTimeout(function(){
-      console.log("I waiting 3 seconds");
-  },3000);
-    res.render('mybox', {recipe: resultArray,})
-    })
+      console.log("Im waiting 7 seconds");
+      res.render('mybox', {recipe: resultArray});
+    },2000);
+    //console.log("Results2", resultArray);
+    //console.log("Hello world");
+    //console.log("Results3", resultArray);
+    //res.render('mybox', {recipe: resultArray});
+    
   });
 
 // app.get("/LogIn", (req, res) => {

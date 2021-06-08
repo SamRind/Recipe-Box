@@ -2,7 +2,7 @@ include includes/head.pug
 include includes/nav.pug
 body
   main.container.border.rounded.bg-light.w-50.mx-auto.mt-4.p-4
-    form.contrast-bg.border.rounded.w-50.mx-auto.mt-5.p-3
+    form.contrast-bg.border.rounded.w-50.mx-auto.mt-5.p-3(name='mybox')
         .from-group
             h1.mt-2.mb-4 Contents of Your Recipe Box
             table(style='width:100%')
@@ -13,8 +13,9 @@ body
                             td 
                                 //-img(src=item.image, style='max-height: 100px; max-width: 100px;')
                             td Name: #{item.name}
-                            td Ingredients: #{item.ingredients}
-                            td Prep: #{item.prep}
+                            td Ingredients: #{item.Ingredients}
+                            td Prep: #{item.Prep}
+                            
     
                             
                               

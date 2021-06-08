@@ -2,12 +2,18 @@ body {
   background-color: #6fb98f;
   height: 100%;
 }
+.my-navbar {
+  background-color: white;
+  color: black;
+}
+
 .navbar-brand {
   margin: 0;
   float: none;
   text-align: center;
   font-family: cursive;
   font-size: xxx-large;
+  color: #15413e;
 }
 .navbar-brand > img {
   display: inline-block;
@@ -22,18 +28,18 @@ nav ul {
 .nav > li {
   display: inline-block;
 }
-.nav-color {
+li > a.nav-color {
   color: #935c4e;
 }
-.nav-color:hover {
+a.nav-color:hover {
   text-decoration: underline;
   color: #a72c0e;
 }
-.nav-color:active {
+a.nav-color:active {
   text-decoration: underline;
   color: #a72c0e;
 }
-.nav-color:focus {
+a.nav-color:focus {
   text-decoration: underline;
   color: #a72c0e;
 }
@@ -108,4 +114,7 @@ a {
   padding: 10px;
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
+}
+.form-footer > a {
+  color: darkblue;
 }
