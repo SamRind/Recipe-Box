@@ -47,3 +47,8 @@ Pug
 Cors
 Axios
 Body-Parser
+
+
+### If not running deployed site run with:
+npx nodemon index.js
+### Deployed Site: 
