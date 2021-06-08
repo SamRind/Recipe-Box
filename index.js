@@ -400,7 +400,7 @@ const Add = new recipe({
     setTimeout(function(){
       console.log("Im waiting 7 seconds");
       res.render('mybox', {recipe: resultArray});
-    },3000);
+    },5000);
     //console.log("Results2", resultArray);
     //console.log("Hello world");
     //console.log("Results3", resultArray);
